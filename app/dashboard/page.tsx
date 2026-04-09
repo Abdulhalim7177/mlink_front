@@ -37,6 +37,8 @@ export default function DashboardPage() {
                                statusMap?.verificationStatus === 'PENDING_DOCUMENTS' || 
                                statusMap?.verificationStatus === 'PENDING_OTP';
 
+  const isAwaitingVerification = statusMap?.verificationStatus === 'PENDING_REVIEW';
+
   return (
     <main className="flex-1 overflow-y-auto p-6 bg-surface-alt">
       
@@ -57,6 +59,23 @@ export default function DashboardPage() {
           <Link href="/dashboard/verification" className="shrink-0 bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-lg font-bold text-sm transition-colors flex items-center shadow-sm">
             Resume Onboarding <ArrowRight className="w-4 h-4 ml-2" />
           </Link>
+        </div>
+      )}
+
+      {/* Awaiting Review Banner */}
+      {!loadingStatus && isAwaitingVerification && (
+        <div className="mb-8 p-5 bg-gradient-to-r from-blue-500/10 to-transparent border border-blue-500/20 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-blue-500/10 text-blue-600 rounded-full shrink-0">
+              <ShieldAlert className="w-8 h-8" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-gray-900">Application Under Review</h3>
+              <p className="text-sm text-gray-600 mt-1">
+                Your profile is in the <strong className="text-blue-700">AWAITING VERIFICATION</strong> queue. Our admin team is actively reviewing your legal documents. You will be notified once complete.
+              </p>
+            </div>
+          </div>
         </div>
       )}
 
