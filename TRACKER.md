@@ -62,15 +62,15 @@ Project starts → landing page renders with brand styling → shared components
 - [ ] FE-2.8 — Mobile OTP (numeric keypad, large inputs)
 
 ### S3 — Onboarding UI
-- [ ] FE-3.1 — Onboarding layout with ProgressStepper
-- [ ] FE-3.2 — Profile form page
-- [ ] FE-3.3 — Document upload page (drag+drop / camera)
-- [ ] FE-3.4 — S3-ready upload flow (request URL → upload → confirm)
-- [ ] FE-3.5 — Upload progress bar component
-- [ ] FE-3.6 — Pending review page (30s polling)
-- [ ] FE-3.7 — Status-based redirects
+- [x] FE-3.1 — Onboarding layout with ProgressStepper
+- [x] FE-3.2 — Profile form page
+- [x] FE-3.3 — Document upload page (drag+drop / camera)
+- [x] FE-3.4 — S3-ready upload flow (request URL → upload → confirm)
+- [x] FE-3.5 — Upload progress bar component
+- [x] FE-3.6 — Pending review page (banner display implementation)
+- [x] FE-3.7 — Status-based redirects
 - [ ] FE-3.8 — Verification rejected page
-- [ ] FE-3.9 — Mobile responsiveness audit
+- [x] FE-3.9 — Mobile responsiveness audit
 
 ### S4 — Admin Verification Queue
 - [ ] FE-4.1 — Admin layout and sidebar
