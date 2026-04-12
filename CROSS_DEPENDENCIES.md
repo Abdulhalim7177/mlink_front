@@ -21,30 +21,30 @@
 
 | # | Backend Deliverable | Status | Frontend Dependency |
 |---|---|---|---|
-| D-1.1 | PostgreSQL database running with initial schema | 🔲 | FE can start independently — no BE dependency for S1 |
-| D-1.2 | `GET /api/v1/health` returns `{ success: true }` | 🔲 | FE can verify API client (Axios) connectivity |
-| D-1.3 | Seed data populated (commodities, states, categories) | 🔲 | FE can use `lib/constants.ts` locally until verified against BE |
+| D-1.1 | PostgreSQL database running with initial schema | ✅ | FE can start independently — no BE dependency for S1 |
+| D-1.2 | `GET /api/v1/health` returns `{ success: true }` | ✅ | FE can verify API client (Axios) connectivity |
+| D-1.3 | Seed data populated (commodities, states, categories) | ✅ | FE can use `lib/constants.ts` locally until verified against BE |
 
 ### Sprint 2 — Authentication
 
 | # | Backend Deliverable | Status | Frontend Dependency | FE Task Blocked |
 |---|---|---|---|---|
-| D-2.1 | `POST /auth/register` — user creation, OTP sent | 🔲 | FE Register page API integration | FE-2.3 |
-| D-2.2 | `POST /auth/verify-otp` — OTP validation, JWT issued | 🔲 | FE OTP page API integration | FE-2.4 |
-| D-2.3 | `POST /auth/login` — email/password, JWT returned | 🔲 | FE Login page, NextAuth setup | FE-2.5 |
-| D-2.4 | `POST /auth/refresh` — refresh token rotation | 🔲 | FE Axios interceptor auto-refresh | FE-1.8 |
-| D-2.5 | `GET /users/me/status` — verification status + tier | 🔲 | FE middleware redirect logic | FE-2.6 |
-| D-2.6 | Email OTP delivery working (Nodemailer) | 🔲 | FE can test full register → OTP flow | FE-2.4 |
+| D-2.1 | `POST /auth/register` — user creation, OTP sent | ✅ | FE Register page API integration | FE-2.3 |
+| D-2.2 | `POST /auth/verify-otp` — OTP validation, JWT issued | ✅ | FE OTP page API integration | FE-2.4 |
+| D-2.3 | `POST /auth/login` — email/password, JWT returned | ✅ | FE Login page, NextAuth setup | FE-2.5 |
+| D-2.4 | `POST /auth/refresh` — refresh token rotation | ✅ | FE Axios interceptor auto-refresh | FE-1.8 |
+| D-2.5 | `GET /users/me/status` — verification status + tier | ✅ | FE middleware redirect logic | FE-2.6 |
+| D-2.6 | Email OTP delivery working (Nodemailer) | ✅ | FE can test full register → OTP flow | FE-2.4 |
 
 ### Sprint 3 — Profile & Documents
 
 | # | Backend Deliverable | Status | Frontend Dependency | FE Task Blocked |
 |---|---|---|---|---|
-| D-3.1 | `POST /users/profile` — save business profile | 🔲 | FE Profile form API integration | FE-3.2 |
-| D-3.2 | `POST /users/documents` — file upload URL generation | 🔲 | FE Document upload flow | FE-3.3, FE-3.4 |
-| D-3.3 | `PUT /users/documents/:id/confirm` — upload confirmation | 🔲 | FE upload → confirm flow | FE-3.4 |
-| D-3.4 | Readiness score auto-calculation (S5) | 🔲 | FE Pending page shows score | FE-3.6 |
-| D-3.5 | Status transitions S3 → S4 → S5 → PENDING_REVIEW | 🔲 | FE Pending page polling detects transitions | FE-3.7 |
+| D-3.1 | `POST /users/profile` — save business profile | ✅ | FE Profile form API integration | FE-3.2 |
+| D-3.2 | `POST /users/documents` — file upload URL generation | ✅ | FE Document upload flow | FE-3.3, FE-3.4 |
+| D-3.3 | `PUT /users/documents/:id/confirm` — upload confirmation | ✅ | FE upload → confirm flow | FE-3.4 |
+| D-3.4 | Readiness score auto-calculation (S5) | ✅ | FE Pending page shows score | FE-3.6 |
+| D-3.5 | Status transitions S3 → S4 → S5 → PENDING_REVIEW | ✅ | FE Pending page polling detects transitions | FE-3.7 |
 
 ---
 
@@ -54,20 +54,20 @@
 
 | # | Backend Deliverable | Status | Frontend Dependency | FE Task Blocked |
 |---|---|---|---|---|
-| D-4.1 | Admin authentication (isAdmin on JWT) | 🔲 | FE admin auth guard | FE-4.2 |
-| D-4.2 | `GET /admin/queue` — paginated queue with SLA flags | 🔲 | FE queue list page | FE-4.3 |
-| D-4.3 | `GET /admin/users/:id` — profile + document URLs | 🔲 | FE individual review page | FE-4.4 |
-| D-4.4 | `POST /admin/queue/:id/approve` — triggers S7+ flow | 🔲 | FE Approve action in modal | FE-4.6 |
-| D-4.5 | `POST /admin/queue/:id/reject` — rejection with reason | 🔲 | FE Reject action in modal | FE-4.6 |
-| D-4.6 | Full S1→S10 pipeline functional (Free path) | 🔲 | FE can test complete onboarding flow | FE-3.7, FE-3.8 |
+| D-4.1 | Admin authentication (isAdmin on JWT) | ✅ | FE admin auth guard | FE-4.2 |
+| D-4.2 | `GET /admin/queue` — paginated queue with SLA flags | ✅ | FE queue list page | FE-4.3 |
+| D-4.3 | `GET /admin/users/:id` — profile + document URLs | ✅ | FE individual review page | FE-4.4 |
+| D-4.4 | `POST /admin/queue/:id/approve` — triggers S7+ flow | ✅ | FE Approve action in modal | FE-4.6 |
+| D-4.5 | `POST /admin/queue/:id/reject` — rejection with reason | ✅ | FE Reject action in modal | FE-4.6 |
+| D-4.6 | Full S1→S10 pipeline functional (Free path) | ✅ | FE can test complete onboarding flow | FE-3.7, FE-3.8 |
 
 ### Sprint 5 — Admin Dashboard
 
 | # | Backend Deliverable | Status | Frontend Dependency | FE Task Blocked |
 |---|---|---|---|---|
-| D-5.1 | `GET /admin/users` — user list with filters | 🔲 | FE user management page | FE-5.2 |
-| D-5.2 | `POST /admin/users/:id/suspend` | 🔲 | FE suspend button | FE-5.3 |
-| D-5.3 | `GET /admin/analytics/funnel` — pipeline data | 🔲 | FE funnel chart | FE-5.1 |
+| D-5.1 | `GET /admin/users` — user list with filters | ✅ | FE user management page | FE-5.2 |
+| D-5.2 | `POST /admin/users/:id/suspend` | ✅ | FE suspend button | FE-5.3 |
+| D-5.3 | `GET /admin/analytics/funnel` — pipeline data | ✅ | FE funnel chart | FE-5.1 |
 | D-5.4 | Rejection resubmission flow (S6 → S4) | 🔲 | FE rejected page → resubmit | FE-3.8 |
 
 ---

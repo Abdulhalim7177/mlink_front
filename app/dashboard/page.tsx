@@ -4,9 +4,11 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuthStore } from '../../store/auth.store';
 import api from '../../lib/api';
+import { ADMIN_BASE_PATH } from '../../lib/constants';
 import { 
   DollarSign, TrendingUp, Sparkles, Percent, 
-  Briefcase, HelpCircle, Bookmark, AlertTriangle, ArrowRight, ShieldAlert, CheckCircle2 
+  Briefcase, HelpCircle, Bookmark, AlertTriangle, ArrowRight, ShieldAlert, CheckCircle2,
+  Shield, Ban, Award, UploadCloud
 } from 'lucide-react';
 
 interface UserStatus {
@@ -38,9 +40,74 @@ export default function DashboardPage() {
                                statusMap?.verificationStatus === 'PENDING_OTP';
 
   const isAwaitingVerification = statusMap?.verificationStatus === 'PENDING_REVIEW';
+  const isRejected = statusMap?.verificationStatus === 'REJECTED';
+  const isSuspended = statusMap?.verificationStatus === 'SUSPENDED';
+  const isBadgeAssigned = statusMap?.verificationStatus === 'BADGE_ASSIGNED';
+  const isAdmin = user?.role === 'ADMIN';
 
   return (
     <main className="flex-1 overflow-y-auto p-6 bg-surface-alt">
+
+      {/* Admin Shortcut Banner */}
+      {!loadingStatus && isAdmin && (
+        <div className="mb-8 p-4 bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-700 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 bg-red-500/20 text-red-400 rounded-full shrink-0">
+              <Shield className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-white">Administrator Access</h3>
+              <p className="text-xs text-gray-400 mt-0.5">You have admin privileges. Access the admin console to manage users and verification queue.</p>
+            </div>
+          </div>
+          <Link href={ADMIN_BASE_PATH + '/queue'} className="shrink-0 bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg font-bold text-xs transition-colors flex items-center shadow-sm uppercase tracking-wider">
+            Open Admin Console <ArrowRight className="w-4 h-4 ml-2" />
+          </Link>
+        </div>
+      )}
+
+      {/* REJECTED Banner */}
+      {!loadingStatus && isRejected && (
+        <div className="mb-8 p-5 bg-gradient-to-r from-red-500/10 to-transparent border border-red-500/20 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-red-500/10 text-red-600 rounded-full shrink-0">
+              <AlertTriangle className="w-8 h-8" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-gray-900">Verification Declined</h3>
+              <p className="text-sm text-gray-600 mt-1">
+                Your application was not approved. Please check your email for details and re-upload your documents.
+              </p>
+            </div>
+          </div>
+          <Link href="/dashboard/verification/rejected" className="shrink-0 bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg font-bold text-sm transition-colors flex items-center shadow-sm">
+            <UploadCloud className="w-4 h-4 mr-2" /> Re-submit Documents
+          </Link>
+        </div>
+      )}
+
+      {/* SUSPENDED Banner */}
+      {!loadingStatus && isSuspended && (
+        <div className="mb-8 p-5 bg-gradient-to-r from-red-600/10 to-transparent border border-red-600/20 rounded-xl flex items-center gap-4">
+          <div className="p-3 bg-red-600/10 text-red-700 rounded-full shrink-0">
+            <Ban className="w-8 h-8" />
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-gray-900">Account Suspended</h3>
+            <p className="text-sm text-gray-600 mt-1">
+              Your account has been suspended by a platform administrator. 
+              Contact <a href="mailto:support@marketlink.ng" className="text-primary font-bold hover:underline">support@marketlink.ng</a> for assistance.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* BADGE_ASSIGNED Banner */}
+      {!loadingStatus && isBadgeAssigned && (
+        <div className="mb-8 p-4 bg-purple-50 border border-purple-200 rounded-xl flex items-center gap-3 text-purple-800 text-sm font-medium">
+          <Award className="w-5 h-5" /> Your badge has been assigned! Your tier classification is being finalized.
+        </div>
+      )}
       
       {/* Verification Banner */}
       {!loadingStatus && requiresVerification && (

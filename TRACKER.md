@@ -1,7 +1,7 @@
 # Market-Link — Frontend Sprint Tracker
 
 > Living document. Update as each task is started and completed.
-> Last updated: April 2, 2026
+> Last updated: April 12, 2026
 
 ---
 
@@ -9,11 +9,11 @@
 
 | Sprint | Weeks | Dates | Phase | Theme | Status |
 |---|---|---|---|---|---|
-| **S1** | 1–2 | Apr 2 – Apr 15 | Phase 1 | Project Setup & Design System | 🔲 Not Started |
-| **S2** | 3–4 | Apr 16 – Apr 29 | Phase 1 | Auth Pages | 🔲 Not Started |
-| **S3** | 5–6 | Apr 30 – May 13 | Phase 1 | Onboarding UI | 🔲 Not Started |
-| **S4** | 7–8 | May 14 – May 27 | Phase 2 | Admin Verification Queue | 🔲 Not Started |
-| **S5** | 9–10 | May 28 – Jun 10 | Phase 2 | Admin Dashboard | 🔲 Not Started |
+| **S1** | 1–2 | Apr 2 – Apr 15 | Phase 1 | Project Setup & Design System | 🟡 In Progress |
+| **S2** | 3–4 | Apr 16 – Apr 29 | Phase 1 | Auth Pages | ✅ Completed |
+| **S3** | 5–6 | Apr 30 – May 13 | Phase 1 | Onboarding UI | ✅ Completed |
+| **S4** | 7–8 | May 14 – May 27 | Phase 2 | Admin Verification Queue | ✅ Completed |
+| **S5** | 9–10 | May 28 – Jun 10 | Phase 2 | Admin Dashboard | ✅ Completed |
 | **S6** | 11–12 | Jun 11 – Jun 24 | Phase 3 | Free Marketplace & Market Pulse | 🔲 Not Started |
 | **S7** | 13–14 | Jun 25 – Jul 8 | Phase 3 | Knowledge Hub & Dashboard | 🔲 Not Started |
 | **S8** | 15–16 | Jul 9 – Jul 22 | Phase 4 | Listing Forms & Management | 🔲 Not Started |
@@ -32,14 +32,14 @@
 
 ### Tasks
 
-- [ ] FE-1.1 — Configure Tailwind with brand colours, fonts, breakpoints
+- [x] FE-1.1 — Configure Tailwind with brand colours, fonts, breakpoints
 - [ ] FE-1.2 — Install and configure Shadcn/ui components
-- [ ] FE-1.3 — Create root layout (fonts, meta tags, providers)
+- [x] FE-1.3 — Create root layout (fonts, meta tags, providers)
 - [ ] FE-1.4 — Build shared components (VerificationBadge, TierBadge, LoadingSpinner, etc.)
-- [ ] FE-1.5 — Set up Zustand stores (auth.store, ui.store)
-- [ ] FE-1.6 — Create constants (commodities, states, sectors)
-- [ ] FE-1.7 — Create TypeScript types matching backend responses
-- [ ] FE-1.8 — Set up Axios API client with JWT interceptor
+- [x] FE-1.5 — Set up Zustand stores (auth.store, ui.store)
+- [x] FE-1.6 — Create constants (commodities, states, sectors)
+- [x] FE-1.7 — Create TypeScript types matching backend responses
+- [x] FE-1.8 — Set up Axios API client with JWT interceptor
 
 ### Sprint Goal
 Next.js project fully configured with design system, shared components, and API integration layer ready.
@@ -53,12 +53,12 @@ Project starts → landing page renders with brand styling → shared components
 
 ### S2 — Auth Pages
 - [ ] FE-2.1 — NextAuth credentials provider setup
-- [ ] FE-2.2 — Auth layout (centred card, logo)
-- [ ] FE-2.3 — Register page
-- [ ] FE-2.4 — OTP verification page
-- [ ] FE-2.5 — Login page
-- [ ] FE-2.6 — Auth middleware (guards + redirects)
-- [ ] FE-2.7 — API error handling (field-level display)
+- [x] FE-2.2 — Auth layout (centred card, logo)
+- [x] FE-2.3 — Register page
+- [x] FE-2.4 — OTP verification page
+- [x] FE-2.5 — Login page
+- [x] FE-2.6 — Auth middleware (guards + redirects)
+- [x] FE-2.7 — API error handling (field-level display)
 - [ ] FE-2.8 — Mobile OTP (numeric keypad, large inputs)
 
 ### S3 — Onboarding UI
@@ -69,17 +69,24 @@ Project starts → landing page renders with brand styling → shared components
 - [x] FE-3.5 — Upload progress bar component
 - [x] FE-3.6 — Pending review page (banner display implementation)
 - [x] FE-3.7 — Status-based redirects
-- [ ] FE-3.8 — Verification rejected page
+- [x] FE-3.8 — Verification rejected page
 - [x] FE-3.9 — Mobile responsiveness audit
 
 ### S4 — Admin Verification Queue
-- [ ] FE-4.1 — Admin layout and sidebar
-- [ ] FE-4.2 — Admin auth guard
-- [ ] FE-4.3 — Queue list page
-- [ ] FE-4.4 — Individual review page
-- [ ] FE-4.5 — DocumentPreview component
-- [ ] FE-4.6 — AdminActionModal
-- [ ] FE-4.7 — SLA breach indicator
+- [x] FE-4.1 — Admin layout and sidebar
+- [x] FE-4.2 — Admin auth guard
+- [x] FE-4.3 — Queue list page
+- [x] FE-4.4 — Individual review page
+- [x] FE-4.5 — DocumentPreview component
+- [x] FE-4.6 — AdminActionModal
+- [x] FE-4.7 — SLA breach indicator
+
+### S5 — Admin Dashboard
+- [x] FE-5.1 — Analytics funnel chart page
+- [x] FE-5.2 — User management page (paginated table, search)
+- [x] FE-5.3 — Suspend/unsuspend user actions
+- [x] FE-5.4 — Dashboard status banners (REJECTED, SUSPENDED, BADGE_ASSIGNED)
+- [x] FE-5.5 — Admin shortcut banner on user dashboard
 
 ---
 
@@ -87,9 +94,11 @@ Project starts → landing page renders with brand styling → shared components
 
 | Sprint | Planned | Completed | Carryover | Notes |
 |---|---|---|---|---|
-| S1 | — | — | — | — |
-| S2 | — | — | — | — |
-| S3 | — | — | — | — |
+| S1 | 8 | 6 | 2 | FE-1.2 (Shadcn), FE-1.4 (shared components) deferred |
+| S2 | 8 | 6 | 2 | FE-2.1 (NextAuth), FE-2.8 (mobile OTP) deferred |
+| S3 | 9 | 9 | 0 | All onboarding UI complete including FE-3.8 rejected page |
+| S4 | 7 | 7 | 0 | Full admin verification queue |
+| S5 | 5 | 5 | 0 | Analytics, user management, dashboard banners |
 
 ---
 

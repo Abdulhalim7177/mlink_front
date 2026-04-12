@@ -7,6 +7,7 @@ import * as z from 'zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import api from '../../../lib/api';
+import { useAuthStore } from '../../../store/auth.store';
 import { Globe, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 const registerSchema = z.object({
