@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import api from '../../../lib/api';
+import adminApi from '../../../lib/admin-api';
 import { LAUNCH_STATES } from '../../../lib/constants';
 import type { AnalyticsFunnelResponse } from '../../../lib/types';
 import { BarChart3, Users, MapPin, Loader2, TrendingUp } from 'lucide-react';
@@ -14,7 +14,7 @@ export default function AdminAnalyticsPage() {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const res = await api.get('/admin/analytics/funnel');
+        const res = await adminApi.get('/admin/analytics/funnel');
         setData(res.data.data);
       } catch (err: any) {
         setError(err.response?.data?.message || 'Failed to load analytics.');

@@ -202,3 +202,28 @@ export interface VerifyOtpResponse {
 export interface RefreshTokenResponse {
   accessToken: string;
 }
+
+// ─── Decoupled Admin System ────────────────────────────────────────────────────
+
+export type AdminDepartment =
+  | 'SUPER_ADMIN'
+  | 'VERIFICATION'
+  | 'CUSTOMER_SERVICE'
+  | 'FINANCE'
+  | 'ANALYTICS';
+
+export interface AdminUser {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  department: AdminDepartment;
+  isActive: boolean;
+  lastLoginAt?: string;
+  createdAt?: string;
+}
+
+export interface AdminLoginResponse {
+  accessToken: string;
+  admin: AdminUser;
+}

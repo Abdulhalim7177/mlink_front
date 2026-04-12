@@ -88,6 +88,18 @@ Project starts → landing page renders with brand styling → shared components
 - [x] FE-5.4 — Dashboard status banners (REJECTED, SUSPENDED, BADGE_ASSIGNED)
 - [x] FE-5.5 — Admin shortcut banner on user dashboard
 
+### S5.5 — Admin System Decoupling (MAJOR)
+- [/] FE-5.5.1 — Admin login page at `/mlink-ctrl-9x4e/login` (dark themed, separate from user login)
+- [/] FE-5.5.2 — `admin-auth.store.ts` (separate Zustand store in `admin-auth-storage`)
+- [/] FE-5.5.3 — `admin-api.ts` (separate Axios instance with admin token + refresh interceptor)
+- [/] FE-5.5.4 — Update admin layout to use `useAdminAuthStore`, redirect to admin login
+- [/] FE-5.5.5 — Update AdminSidebar with department-based nav items
+- [/] FE-5.5.6 — Department-based landing pages after login
+- [/] FE-5.5.7 — Admin Management page (SUPER_ADMIN: create/edit/deactivate admins)
+- [/] FE-5.5.8 — Update all admin pages to use `adminApi`
+- [/] FE-5.5.9 — Remove admin banner from user dashboard
+- [/] FE-5.5.10 — Update `lib/types.ts` with AdminDepartment, AdminUser types
+
 ---
 
 ## Velocity Log
@@ -99,6 +111,7 @@ Project starts → landing page renders with brand styling → shared components
 | S3 | 9 | 9 | 0 | All onboarding UI complete including FE-3.8 rejected page |
 | S4 | 7 | 7 | 0 | Full admin verification queue |
 | S5 | 5 | 5 | 0 | Analytics, user management, dashboard banners |
+| S5.5 | 10 | 0 | 10 | Admin system decoupling — in progress |
 
 ---
 

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import api from '../../../lib/api';
+import adminApi from '../../../lib/admin-api';
 import { ADMIN_BASE_PATH, VERIFICATION_STATUS_CONFIG } from '../../../lib/constants';
 import type { AdminQueueItem, AdminQueueResponse } from '../../../lib/types';
 import {
@@ -28,7 +28,7 @@ export default function AdminQueuePage() {
     try {
       setLoading(true);
       setError('');
-      const res = await api.get(`/admin/queue?page=${page}&limit=10`);
+      const res = await adminApi.get(`/admin/queue?page=${page}&limit=10`);
       const result: AdminQueueResponse = res.data.data;
       setQueue(result.data);
       setMeta(result.meta);

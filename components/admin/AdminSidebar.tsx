@@ -2,16 +2,17 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useAuthStore } from '../../store/auth.store';
-import { ADMIN_BASE_PATH, VERIFICATION_STATUS_CONFIG } from '../../lib/constants';
+import { usePathname, useRouter } from 'next/navigation';
+import { useAdminAuthStore } from '../../store/admin-auth.store';
+import adminApi from '../../lib/admin-api';
+import { ADMIN_BASE_PATH } from '../../lib/constants';
 import {
   ClipboardCheck,
   Users,
   BarChart3,
-  LayoutGrid,
-  ArrowLeft,
   Shield,
+  LogOut,
+  Settings,
   LogOut,
 } from 'lucide-react';
 
@@ -23,13 +24,40 @@ export default function AdminSidebar({
   setMobileOpen: (val: boolean) => void;
 }) {
   const pathname = usePathname();
-  const { user, logout } = useAuthStore();
+  const router = useRouter();
+  const { admin, logout } = useAdminAuthStore();
 
-  const navLinks = [
-    { name: 'Verification Queue', href: `${ADMIN_BASE_PATH}/queue`, icon: ClipboardCheck },
-    { name: 'User Management', href: `${ADMIN_BASE_PATH}/users`, icon: Users },
-    { name: 'Analytics', href: `${ADMIN_BASE_PATH}/analytics`, icon: BarChart3 },
-  ];
+  const handleLogout = async () => {
+    try {
+      await adminApi.post('/admin-auth/logout');
+    } catch {
+      // Ignore API errors on logout
+    } finally {
+      logout();
+      router.replace('/mlink-ctrl-9x4e/login');
+    }
+  };
+
+  const navLinks = [];
+
+  const dep = admin?.department;
+  const isSuper = dep === 'SUPER_ADMIN';
+
+  if (isSuper || dep === 'VERIFICATION') {
+    navLinks.push({ name: 'Verification Queue', href: `${ADMIN_BASE_PATH}/queue`, icon: ClipboardCheck });
+  }
+  
+  if (isSuper || dep === 'VERIFICATION' || dep === 'CUSTOMER_SERVICE') {
+    navLinks.push({ name: 'User Management', href: `${ADMIN_BASE_PATH}/users`, icon: Users });
+  }
+
+  if (isSuper || dep === 'ANALYTICS') {
+    navLinks.push({ name: 'Analytics', href: `${ADMIN_BASE_PATH}/analytics`, icon: BarChart3 });
+  }
+
+  if (isSuper) {
+    navLinks.push({ name: 'Admin Management', href: `${ADMIN_BASE_PATH}/admin-management`, icon: Settings });
+  }
 
   const activeClass =
     'bg-gradient-to-r from-red-500/15 to-transparent border-l-4 border-red-400 text-white';
@@ -69,13 +97,15 @@ export default function AdminSidebar({
         <div className="p-4 border-b border-gray-800">
           <div className="flex items-center space-x-3 p-2 rounded-lg bg-gray-800/50">
             <div className="w-10 h-10 rounded-full bg-gradient-to-r from-red-500 to-red-700 flex items-center justify-center text-white font-bold tracking-widest shrink-0">
-              {user?.email?.charAt(0).toUpperCase() || 'A'}
+              {admin?.firstName?.charAt(0).toUpperCase() || 'A'}
             </div>
             <div className="overflow-hidden">
               <h4 className="text-sm font-semibold text-white truncate">
-                {user?.firstName || user?.email?.split('@')[0] || 'Admin'}
+                {admin?.firstName} {admin?.lastName}
               </h4>
-              <span className="text-xs text-red-400 font-medium">Platform Administrator</span>
+              <span className="text-xs text-red-400 font-medium">
+                {admin?.department.replace('_', ' ')}
+              </span>
             </div>
           </div>
         </div>
@@ -100,18 +130,10 @@ export default function AdminSidebar({
           ))}
 
           <div className="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 mt-8">
-            Navigation
+            Account
           </div>
-          <Link
-            href="/dashboard"
-            onClick={() => setMobileOpen(false)}
-            className="flex items-center px-6 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 border-l-4 border-transparent transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5 mr-3" />
-            User Dashboard
-          </Link>
           <button
-            onClick={logout}
+            onClick={handleLogout}
             className="w-full flex items-center px-6 py-3 text-sm font-medium transition-colors text-red-400 hover:text-red-300 hover:bg-white/5 border-l-4 border-transparent"
           >
             <LogOut className="w-5 h-5 mr-3" />

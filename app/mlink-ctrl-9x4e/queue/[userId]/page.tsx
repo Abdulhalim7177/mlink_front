@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import api from '../../../../lib/api';
+import adminApi from '../../../../lib/admin-api';
 import { ADMIN_BASE_PATH, DOCUMENT_TYPES, DOC_STATUS_CONFIG } from '../../../../lib/constants';
 import type { AdminUserDetail, UserDocument } from '../../../../lib/types';
 import AdminActionModal from '../../../../components/admin/AdminActionModal';
@@ -44,7 +44,7 @@ export default function AdminUserReviewPage() {
   const fetchUser = async () => {
     try {
       setLoading(true);
-      const res = await api.get(`/admin/users/${userId}`);
+      const res = await adminApi.get(`/admin/users/${userId}`);
       setUserData(res.data.data);
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to load user data.');
@@ -60,7 +60,7 @@ export default function AdminUserReviewPage() {
   const handleApproveDoc = async (documentId: string) => {
     try {
       setActionLoading(documentId);
-      await api.post(`/admin/queue/${userId}/approve`, { documentId });
+      await adminApi.post(`/admin/queue/${userId}/approve`, { documentId });
       await fetchUser();
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to approve document.');
@@ -72,7 +72,7 @@ export default function AdminUserReviewPage() {
   const handleRejectDoc = async (documentId: string) => {
     try {
       setActionLoading(documentId);
-      await api.post(`/admin/queue/${userId}/reject`, {
+      await adminApi.post(`/admin/queue/${userId}/reject`, {
         documentId,
         reason: 'Document does not meet requirements.',
       });
@@ -87,7 +87,7 @@ export default function AdminUserReviewPage() {
   const handleFinalizeApproval = async () => {
     try {
       setActionLoading('finalize');
-      await api.post(`/admin/queue/${userId}/approve-user`, { isApproval: true });
+      await adminApi.post(`/admin/queue/${userId}/approve-user`, { isApproval: true });
       router.push(`${ADMIN_BASE_PATH}/queue`);
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to finalize approval.');
@@ -96,12 +96,12 @@ export default function AdminUserReviewPage() {
   };
 
   const handleRejectUser = async (reason: string) => {
-    await api.post(`/admin/queue/${userId}/reject-user`, { reason });
+    await adminApi.post(`/admin/queue/${userId}/reject-user`, { reason });
     router.push(`${ADMIN_BASE_PATH}/queue`);
   };
 
   const handleRequestDocs = async (message: string) => {
-    await api.post(`/admin/queue/${userId}/request-documents`, { message });
+    await adminApi.post(`/admin/queue/${userId}/request-documents`, { message });
     router.push(`${ADMIN_BASE_PATH}/queue`);
   };
 

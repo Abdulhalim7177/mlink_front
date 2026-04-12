@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import api from '../../../lib/api';
+import adminApi from '../../../lib/admin-api';
 import {
   ADMIN_BASE_PATH,
   VERIFICATION_STATUS_CONFIG,
@@ -36,7 +36,7 @@ export default function AdminUsersPage() {
     try {
       setLoading(true);
       setError('');
-      const res = await api.get(`/admin/users?page=${page}&limit=10`);
+      const res = await adminApi.get(`/admin/users?page=${page}&limit=10`);
       const result = res.data.data as AdminUserListResponse;
       setUsers(result.data);
       setPagination(result.pagination);
@@ -53,14 +53,14 @@ export default function AdminUsersPage() {
 
   const handleSuspend = async (reason: string) => {
     if (!suspendUserId) return;
-    await api.post(`/admin/users/${suspendUserId}/suspend`, { reason });
+    await adminApi.post(`/admin/users/${suspendUserId}/suspend`, { reason });
     setSuspendUserId(null);
     fetchUsers(pagination.page);
   };
 
   const handleUnsuspend = async (userId: string) => {
     try {
-      await api.post(`/admin/users/${userId}/unsuspend`);
+      await adminApi.post(`/admin/users/${userId}/unsuspend`);
       fetchUsers(pagination.page);
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to unsuspend user.');

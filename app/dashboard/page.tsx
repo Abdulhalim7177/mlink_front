@@ -43,29 +43,9 @@ export default function DashboardPage() {
   const isRejected = statusMap?.verificationStatus === 'REJECTED';
   const isSuspended = statusMap?.verificationStatus === 'SUSPENDED';
   const isBadgeAssigned = statusMap?.verificationStatus === 'BADGE_ASSIGNED';
-  const isAdmin = user?.role === 'ADMIN';
 
   return (
     <main className="flex-1 overflow-y-auto p-6 bg-surface-alt">
-
-      {/* Admin Shortcut Banner */}
-      {!loadingStatus && isAdmin && (
-        <div className="mb-8 p-4 bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-700 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-red-500/20 text-red-400 rounded-full shrink-0">
-              <Shield className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="text-sm font-bold text-white">Administrator Access</h3>
-              <p className="text-xs text-gray-400 mt-0.5">You have admin privileges. Access the admin console to manage users and verification queue.</p>
-            </div>
-          </div>
-          <Link href={ADMIN_BASE_PATH + '/queue'} className="shrink-0 bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg font-bold text-xs transition-colors flex items-center shadow-sm uppercase tracking-wider">
-            Open Admin Console <ArrowRight className="w-4 h-4 ml-2" />
-          </Link>
-        </div>
-      )}
-
       {/* REJECTED Banner */}
       {!loadingStatus && isRejected && (
         <div className="mb-8 p-5 bg-gradient-to-r from-red-500/10 to-transparent border border-red-500/20 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">

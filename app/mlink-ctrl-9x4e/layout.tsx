@@ -1,33 +1,39 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuthStore } from '../../store/auth.store';
+import { useRouter, usePathname } from 'next/navigation';
+import { useAdminAuthStore } from '../../store/admin-auth.store';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import { Loader2, Menu, Shield } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { user, isAuthenticated } = useAuthStore();
+  const pathname = usePathname();
+  const { admin, isAuthenticated } = useAdminAuthStore();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+
+  // Is this the login page?
+  const isLoginPage = pathname === '/mlink-ctrl-9x4e/login';
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    if (isMounted) {
+    if (isMounted && !isLoginPage) {
       if (!isAuthenticated) {
-        router.replace('/auth/login');
-        return;
-      }
-      if (user?.role !== 'ADMIN') {
-        router.replace('/dashboard');
+        router.replace('/mlink-ctrl-9x4e/login');
         return;
       }
     }
-  }, [isMounted, isAuthenticated, user, router]);
+    // If logged in and on the login page, redirect to correct dashboard
+    if (isMounted && isLoginPage && isAuthenticated && admin) {
+      if (admin.department === 'SUPER_ADMIN') router.replace('/mlink-ctrl-9x4e/admin-management');
+      else if (admin.department === 'CUSTOMER_SERVICE') router.replace('/mlink-ctrl-9x4e/users');
+      else router.replace('/mlink-ctrl-9x4e/queue');
+    }
+  }, [isMounted, isAuthenticated, isLoginPage, admin, router]);
 
   if (!isMounted) {
     return (
@@ -37,13 +43,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     );
   }
 
-  if (!isAuthenticated || user?.role !== 'ADMIN') {
+  // If this is the login page, don't show the dashboard layout
+  if (isLoginPage) {
+    return <>{children}</>;
+  }
+
+  if (!isAuthenticated || !admin) {
     return (
       <div className="min-h-screen bg-gray-950 flex items-center justify-center">
         <div className="text-center">
           <Shield className="w-12 h-12 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-bold text-white mb-2">Access Denied</h2>
-          <p className="text-gray-400 text-sm">You do not have permission to access this area.</p>
+          <h2 className="text-xl font-bold text-white mb-2">Session Expired</h2>
+          <p className="text-gray-400 text-sm">Please log in to the admin console.</p>
         </div>
       </div>
     );
@@ -69,7 +80,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
           </div>
           <div className="text-sm text-gray-500">
-            {user?.email}
+            {admin?.email} ({admin?.department.replace('_', ' ')})
           </div>
         </header>
 
