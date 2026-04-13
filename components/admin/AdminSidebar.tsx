@@ -13,7 +13,6 @@ import {
   Shield,
   LogOut,
   Settings,
-  LogOut,
 } from 'lucide-react';
 
 export default function AdminSidebar({
