@@ -14,7 +14,7 @@
 | **S3** | 5–6 | Apr 30 – May 13 | Phase 1 | Onboarding UI | ✅ Completed |
 | **S4** | 7–8 | May 14 – May 27 | Phase 2 | Admin Verification Queue | ✅ Completed |
 | **S5** | 9–10 | May 28 – Jun 10 | Phase 2 | Admin Dashboard | ✅ Completed |
-| **S6** | 11–12 | Jun 11 – Jun 24 | Phase 3 | Free Marketplace & Market Pulse | 🟡 In Progress |
+| **S6** | 11–12 | Jun 11 – Jun 24 | Phase 3 | Free Marketplace & Market Pulse | ✅ Completed |
 | **S7** | 13–14 | Jun 25 – Jul 8 | Phase 3 | Knowledge Hub & Dashboard | 🔲 Not Started |
 | **S8** | 15–16 | Jul 9 – Jul 22 | Phase 4 | Listing Forms & Management | 🔲 Not Started |
 | **S9** | 17–18 | Jul 23 – Aug 5 | Phase 4 | Search & Inquiry UI | 🔲 Not Started |
@@ -100,6 +100,15 @@ Project starts → landing page renders with brand styling → shared components
 - [x] FE-5.5.9 — Remove admin banner from user dashboard
 - [x] FE-5.5.10 — Update `lib/types.ts` with AdminDepartment, AdminUser types
 
+### S6 — Free Marketplace & Market Pulse
+- [x] FE-6.1 — Build Free marketplace page (BusinessCard grid, FilterPanel, SearchBar)
+- [x] FE-6.2 — Build BusinessCard component (name, sector, state, badge, commodities)
+- [x] FE-6.3 — Build Market Pulse Free tier page (PriceTable with DataLagBanner)
+- [x] FE-6.4 — Build DataLagBanner (persistent upgrade CTA)
+- [x] FE-6.5 — Build PriceTable component (commodity, state, price, unit, date)
+- [x] FE-6.6 — Build FilterPanel (desktop sidebar, mobile slide-up drawer)
+- [x] FE-6.7 — Build UpgradePrompt component (feature-specific messaging, pricing, CTA)
+
 ---
 
 ## Velocity Log
@@ -112,6 +121,7 @@ Project starts → landing page renders with brand styling → shared components
 | S4 | 7 | 7 | 0 | Full admin verification queue |
 | S5 | 5 | 5 | 0 | Analytics, user management, dashboard banners |
 | S5.5 | 10 | 10 | 0 | Admin system decoupling — complete |
+| S6 | 7 | 7 | 0 | Free Marketplace & Market Pulse — complete |
 
 ---
 
