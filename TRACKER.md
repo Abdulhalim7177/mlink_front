@@ -9,12 +9,12 @@
 
 | Sprint | Weeks | Dates | Phase | Theme | Status |
 |---|---|---|---|---|---|
-| **S1** | 1–2 | Apr 2 – Apr 15 | Phase 1 | Project Setup & Design System | 🟡 In Progress |
+| **S1** | 1–2 | Apr 2 – Apr 15 | Phase 1 | Project Setup & Design System | ✅ Completed |
 | **S2** | 3–4 | Apr 16 – Apr 29 | Phase 1 | Auth Pages | ✅ Completed |
 | **S3** | 5–6 | Apr 30 – May 13 | Phase 1 | Onboarding UI | ✅ Completed |
 | **S4** | 7–8 | May 14 – May 27 | Phase 2 | Admin Verification Queue | ✅ Completed |
 | **S5** | 9–10 | May 28 – Jun 10 | Phase 2 | Admin Dashboard | ✅ Completed |
-| **S6** | 11–12 | Jun 11 – Jun 24 | Phase 3 | Free Marketplace & Market Pulse | 🔲 Not Started |
+| **S6** | 11–12 | Jun 11 – Jun 24 | Phase 3 | Free Marketplace & Market Pulse | 🟡 In Progress |
 | **S7** | 13–14 | Jun 25 – Jul 8 | Phase 3 | Knowledge Hub & Dashboard | 🔲 Not Started |
 | **S8** | 15–16 | Jul 9 – Jul 22 | Phase 4 | Listing Forms & Management | 🔲 Not Started |
 | **S9** | 17–18 | Jul 23 – Aug 5 | Phase 4 | Search & Inquiry UI | 🔲 Not Started |
@@ -33,9 +33,9 @@
 ### Tasks
 
 - [x] FE-1.1 — Configure Tailwind with brand colours, fonts, breakpoints
-- [ ] FE-1.2 — Install and configure Shadcn/ui components
+- [x] FE-1.2 — Install and configure Shadcn/ui components
 - [x] FE-1.3 — Create root layout (fonts, meta tags, providers)
-- [ ] FE-1.4 — Build shared components (VerificationBadge, TierBadge, LoadingSpinner, etc.)
+- [x] FE-1.4 — Build shared components (VerificationBadge, TierBadge, LoadingSpinner, etc.)
 - [x] FE-1.5 — Set up Zustand stores (auth.store, ui.store)
 - [x] FE-1.6 — Create constants (commodities, states, sectors)
 - [x] FE-1.7 — Create TypeScript types matching backend responses
@@ -89,16 +89,16 @@ Project starts → landing page renders with brand styling → shared components
 - [x] FE-5.5 — Admin shortcut banner on user dashboard
 
 ### S5.5 — Admin System Decoupling (MAJOR)
-- [/] FE-5.5.1 — Admin login page at `/mlink-ctrl-9x4e/login` (dark themed, separate from user login)
-- [/] FE-5.5.2 — `admin-auth.store.ts` (separate Zustand store in `admin-auth-storage`)
-- [/] FE-5.5.3 — `admin-api.ts` (separate Axios instance with admin token + refresh interceptor)
-- [/] FE-5.5.4 — Update admin layout to use `useAdminAuthStore`, redirect to admin login
-- [/] FE-5.5.5 — Update AdminSidebar with department-based nav items
-- [/] FE-5.5.6 — Department-based landing pages after login
-- [/] FE-5.5.7 — Admin Management page (SUPER_ADMIN: create/edit/deactivate admins)
-- [/] FE-5.5.8 — Update all admin pages to use `adminApi`
-- [/] FE-5.5.9 — Remove admin banner from user dashboard
-- [/] FE-5.5.10 — Update `lib/types.ts` with AdminDepartment, AdminUser types
+- [x] FE-5.5.1 — Admin login page at `/mlink-ctrl-9x4e/login` (dark themed, separate from user login)
+- [x] FE-5.5.2 — `admin-auth.store.ts` (separate Zustand store in `admin-auth-storage`)
+- [x] FE-5.5.3 — `admin-api.ts` (separate Axios instance with admin token + refresh interceptor)
+- [x] FE-5.5.4 — Update admin layout to use `useAdminAuthStore`, redirect to admin login
+- [x] FE-5.5.5 — Update AdminSidebar with department-based nav items
+- [x] FE-5.5.6 — Department-based landing pages after login
+- [x] FE-5.5.7 — Admin Management page (SUPER_ADMIN: create/edit/deactivate admins)
+- [x] FE-5.5.8 — Update all admin pages to use `adminApi`
+- [x] FE-5.5.9 — Remove admin banner from user dashboard
+- [x] FE-5.5.10 — Update `lib/types.ts` with AdminDepartment, AdminUser types
 
 ---
 
@@ -106,12 +106,12 @@ Project starts → landing page renders with brand styling → shared components
 
 | Sprint | Planned | Completed | Carryover | Notes |
 |---|---|---|---|---|
-| S1 | 8 | 6 | 2 | FE-1.2 (Shadcn), FE-1.4 (shared components) deferred |
+| S1 | 8 | 8 | 0 | All setup tasks complete including Shadcn/ui and shared components |
 | S2 | 8 | 6 | 2 | FE-2.1 (NextAuth), FE-2.8 (mobile OTP) deferred |
 | S3 | 9 | 9 | 0 | All onboarding UI complete including FE-3.8 rejected page |
 | S4 | 7 | 7 | 0 | Full admin verification queue |
 | S5 | 5 | 5 | 0 | Analytics, user management, dashboard banners |
-| S5.5 | 10 | 0 | 10 | Admin system decoupling — in progress |
+| S5.5 | 10 | 10 | 0 | Admin system decoupling — complete |
 
 ---
 
