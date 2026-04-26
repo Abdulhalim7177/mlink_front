@@ -66,17 +66,29 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        // Send a request to the refresh endpoint. It will automatically include the M_LINK_REFRESH_TOKEN cookie
+        // Get refresh token from localStorage
+        const storedAuth = localStorage.getItem('auth-storage');
+        let refreshToken = null;
+        
+        if (storedAuth) {
+          const authObj = JSON.parse(storedAuth);
+          refreshToken = authObj.state?.refreshToken;
+        }
+        
+        if (!refreshToken) {
+          throw new Error('No refresh token available');
+        }
+        
+        // Send refresh token in request body (not relying on cookies)
         const response = await axios.post(
           `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:9000/api/v1'}/auth/refresh`,
-          {},
+          { refreshToken }, // Send in body
           { withCredentials: true }
         );
 
         const { accessToken } = response.data.data;
 
-        // Update the Zustand store manually if possible, or emit an event
-        const storedAuth = localStorage.getItem('auth-storage');
+        // Update the Zustand store
         if (storedAuth) {
           const authObj = JSON.parse(storedAuth);
           authObj.state.accessToken = accessToken;

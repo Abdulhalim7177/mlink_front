@@ -19,9 +19,10 @@ export interface User {
 interface AuthState {
   user: User | null;
   accessToken: string | null;
+  refreshToken: string | null; // Add refresh token
   isAuthenticated: boolean;
   isLoading: boolean;
-  setCredentials: (user: User, accessToken: string) => void;
+  setCredentials: (user: User, accessToken: string, refreshToken: string) => void;
   updateUser: (partial: Partial<User>) => void;
   logout: () => void;
   setLoading: (loading: boolean) => void;
@@ -34,16 +35,17 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       user: null,
       accessToken: null,
+      refreshToken: null, // Add refresh token
       isAuthenticated: false,
       isLoading: true, // Start as loading to prevent flash
-      setCredentials: (user, accessToken) => set({ user, accessToken, isAuthenticated: true, isLoading: false }),
+      setCredentials: (user, accessToken, refreshToken) => set({ user, accessToken, refreshToken, isAuthenticated: true, isLoading: false }),
       updateUser: (partial) =>
         set((state) => ({
           user: state.user ? { ...state.user, ...partial } : null,
         })),
-      logout: () => set({ user: null, accessToken: null, isAuthenticated: false, isLoading: false }),
+      logout: () => set({ user: null, accessToken: null, refreshToken: null, isAuthenticated: false, isLoading: false }),
       setLoading: (loading) => set({ isLoading: loading }),
-      clearCredentials: () => set({ user: null, accessToken: null, isAuthenticated: false, isLoading: false }),
+      clearCredentials: () => set({ user: null, accessToken: null, refreshToken: null, isAuthenticated: false, isLoading: false }),
     }),
     {
       name: 'auth-storage', // Used in api interceptor to dynamically inject the token

@@ -38,8 +38,8 @@ export default function LoginPage() {
       setServerError('');
       const response = await api.post('/auth/login', data);
       
-      const { accessToken, user } = response.data.data;
-      setCredentials(user, accessToken);
+      const { accessToken, refreshToken, user } = response.data.data;
+      setCredentials(user, accessToken, refreshToken);
       
       // Redirect based on backend status routing rules
       router.push('/dashboard');
