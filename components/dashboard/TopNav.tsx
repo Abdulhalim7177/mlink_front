@@ -2,8 +2,27 @@
 
 import React from 'react';
 import { Menu, Search, Plus, Bell } from 'lucide-react';
+import { useAuthStore } from '../../store/auth.store';
+import { UserTier } from '../../lib/types';
+
+const tierColors: Record<UserTier, string> = {
+  'BASIC': 'bg-gray-100 text-gray-700 border-gray-200',
+  'PRO': 'bg-primary/10 text-primary-dark border-primary/20',
+  'ENTERPRISE': 'bg-accent/10 text-accent-dark border-accent/20',
+  'ADMIN': 'bg-red-100 text-red-700 border-red-200'
+};
+
+const tierLabels: Record<UserTier, string> = {
+  'BASIC': 'Basic',
+  'PRO': 'Pro',
+  'ENTERPRISE': 'Enterprise',
+  'ADMIN': 'Admin'
+};
 
 export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
+  const user = useAuthStore((state) => state.user);
+  const tier = user?.tier || 'BASIC';
+
   return (
     <header className="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 sticky top-0 z-30 shrink-0">
       <div className="flex items-center md:hidden">
@@ -15,9 +34,9 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
       {/* Page Title - Hidden on small screens */}
       <div className="hidden md:flex items-center">
         <h1 className="text-xl font-bold text-gray-800 tracking-tight">Overview</h1>
-        <span className="ml-3 px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-500">
-          Last updated: Just now
-        </span>
+        <div className={`ml-4 px-2.5 py-0.5 rounded-full text-xs font-bold border ${tierColors[tier]}`}>
+          {tierLabels[tier]} Plan
+        </div>
       </div>
 
       {/* Right Actions */}

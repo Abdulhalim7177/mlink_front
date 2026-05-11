@@ -8,12 +8,12 @@
 
 ## Timeline Overview
 
-| Phase | Sprints | Weeks | Dates | Theme |
-|---|---|---|---|---|
-| **1 — Foundation** | S1–S3 | 1–6 | Apr 2 – May 13 | Setup, Auth Pages, Onboarding UI |
-| **2 — Verification + Admin** | S4–S5 | 7–10 | May 14 – Jun 10 | Admin Dashboard, Verification Queue |
-| **3 — Basic Plan** | S6–S7 | 11–14 | Jun 11 – Jul 8 | BASIC Marketplace, Market Pulse, Knowledge Hub |
-| **4 — Pro Listings** | S8–S9 | 15–18 | Jul 9 – Aug 5 | Listing Forms, Search, Inquiry UI |
+| Phase | Sprints | Weeks | Dates | Theme | Status |
+|---|---|---|---|---|---|
+| **1 — Foundation** | S1–S3 | 1–6 | Apr 2 – May 13 | Setup, Auth Pages, Onboarding UI | ✅ Completed |
+| **2 — Verification + Admin** | S4–S5 | 7–10 | May 14 – Jun 10 | Admin Dashboard, Verification Queue | ✅ Completed |
+| **3 — Basic Plan** | S6–S7 | 11–14 | Jun 11 – Jul 8 | BASIC Marketplace, Market Pulse, Knowledge Hub | ✅ Completed |
+| **4 — Pro Listings** | S8–S9 | 15–18 | Jul 9 – Aug 5 | Listing Forms, Search, Inquiry UI | 🚧 In Progress |
 | **5 — Messaging** | S10–S11 | 19–22 | Aug 6 – Sep 2 | Messaging UI |
 | **6 — Services** | S12–S13 | 23–26 | Sep 3 – Sep 30 | Services Marketplace UI |
 | **7 — Payments** | S14 | 27–28 | Oct 1 – Oct 14 | Subscription Page, Paystack Popup |

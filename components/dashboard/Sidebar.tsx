@@ -41,26 +41,26 @@ export default function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boo
     ? `${user.profile.firstName} ${user.profile.lastName}`
     : user?.email.split('@')[0];
 
-  const tierMap: Record<string, string> = {
-    'BASIC': 'Standard User',
-    'PRO': 'Pro Member',
-    'ENTERPRISE': 'Enterprise Investor',
-    'ADMIN': 'Platform Admin'
+  const tierBadgeColors: Record<string, string> = {
+    'BASIC': 'bg-gray-700 text-gray-300 border-gray-600',
+    'PRO': 'bg-primary/20 text-primary-light border-primary/30',
+    'ENTERPRISE': 'bg-accent/20 text-accent-light border-accent/30',
+    'ADMIN': 'bg-red-900/40 text-red-300 border-red-800/50'
   };
 
-  const currentTier = user?.tier ? tierMap[user.tier] : 'Standard User';
+  const currentTierLabel = user?.tier || 'BASIC';
 
   // Navigation Links
   const platformLinks = [
     { name: 'Dashboard', href: '/dashboard', icon: BarChart2 },
-    { name: 'Opportunities', href: '/dashboard/opportunities', icon: Search, badge: 'New' },
-    { name: 'AI Matchmaking', href: '/dashboard/ai-matchmaking', icon: Brain },
+    { name: 'Market Pulse', href: '/market-pulse', icon: BarChart2 },
+    { name: 'Marketplace', href: '/marketplace', icon: Search },
+    { name: 'AI Matching', href: '/dashboard/ai-matches', icon: Brain },
   ];
 
   const managementLinks = [
-    { name: 'Deal Flow', href: '/dashboard/deal-flow', icon: Briefcase },
-    { name: 'Messages', href: '/dashboard/messages', icon: MessageSquare, badge: '3' },
-    { name: 'Contracts', href: '/dashboard/contracts', icon: FileSignature },
+    { name: 'Inquiries', href: '/dashboard/inquiries', icon: MessageSquare },
+    { name: 'Deals & Contracts', href: '/dashboard/deals', icon: FileSignature },
   ];
 
   const activeClass = "bg-gradient-to-r from-accent/10 to-transparent border-l-4 border-accent text-accent";
@@ -99,7 +99,9 @@ export default function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boo
             </div>
             <div className="overflow-hidden">
               <h4 className="text-sm font-semibold text-white truncate capitalize">{navUserName}</h4>
-              <span className="text-xs text-accent font-medium truncate py-0.5">{currentTier}</span>
+              <div className={`mt-0.5 inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold border ${tierBadgeColors[currentTierLabel]}`}>
+                {currentTierLabel}
+              </div>
             </div>
           </div>
         </div>
