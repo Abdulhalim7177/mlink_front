@@ -140,54 +140,53 @@
 
 ---
 
-## Phase 4 — Pro Listings (Sprints 8–9)
+## Phase 4 — Pro Listings & Trade (Sprints 8–9)
 
-### Sprint 8 (Weeks 15–16) — Listing Creation & Management
+### Sprint 8 (Weeks 15–16) — Listing Management UI (Seller Focus)
 
-| ID | Task | Acceptance Criteria |
-|---|---|---|
-| FE-8.1 | Build listing creation form — all fields, photo upload, Zod validation | Form validates, photos upload with progress, API call succeeds |
-| FE-8.2 | Build multi-photo upload — parallel uploads, progress bars per photo | Up to 5 photos upload simultaneously with individual progress |
-| FE-8.3 | Build My Listings dashboard — status, stats, pause/edit/delete actions | Seller sees all listings with action buttons |
-| FE-8.4 | Build listing edit page — pre-populated form | Edit loads existing data, saves changes correctly |
-| FE-8.5 | Build admin listing moderation page — pending queue, approve/reject | Admin can review and moderate new listings |
-
-### Sprint 9 (Weeks 17–18) — Search & Inquiry Flow
+**Goal:** Pro sellers can manage commodity listings; Admin moderates for quality.
 
 | ID | Task | Acceptance Criteria |
 |---|---|---|
-| FE-9.1 | Build Beta search page — search bar, all filters, sort options | Full-text search works, filters combinable, results paginated |
-| FE-9.2 | Build ListingCard component — badge, commodity, price, inquiry CTA | Cards display all listing info correctly |
-| FE-9.3 | Build InquiryModal — send inquiry form with quota check | Modal validates, checks quota, sends inquiry, shows remaining |
-| FE-9.4 | Build Inquiries page — sent + received tabs, status tracking | Both tabs render with correct data, status badges shown |
-| FE-9.5 | Build InquiryQuotaDisplay — "N inquiries remaining" in header | Quota shown, colour-coded by remaining count |
+| FE-8.1 | Build Listing Creation Form — multi-step with photo upload | Validates fields; parallel photo uploads (max 5); API integration |
+| FE-8.2 | Build "My Listings" Dashboard — status & action management | Show active/pending/rejected/expired; pause/edit/delete actions |
+| FE-8.3 | Build Admin Listing Moderation UI — queue & action modals | Admin review page with photo gallery and approve/reject actions |
+| FE-8.4 | Implement Listing Quota UI — "5 Active Listings" enforcement | Prevents new listing creation when limit is reached; shows upgrade prompt |
 
-**Deliverable:** Seller creates listings. Buyer searches, finds, and inquires on listings. Quota enforced with clear display.
+### Sprint 9 (Weeks 17–18) — Search & Structured Inquiry UI (Buyer Focus)
+
+**Goal:** Advanced discovery and formal trade inquiry flow.
+
+| ID | Task | Acceptance Criteria |
+|---|---|---|
+| FE-9.1 | Build Advanced Search Interface — full filters & sort | Filter by state, price, commodity, and terms; uses backend full-text search |
+| FE-9.2 | Build Structured Inquiry Modal — quantity/unit/delivery fields | Replaces free-text message; validates structured trade fields |
+| FE-9.3 | Build Inquiry Quota Display — "N inquiries remaining" | Dynamic counter in header/inquiry modal; color-coded by usage |
+| FE-9.4 | Build "My Inquiries" Tracking Page — sent & received tabs | Track status (SENT → VIEWED → RESPONDED) with timeline view |
+| FE-9.5 | Verified Badge Visibility — Inject BadgeLevel into Listing/Profile Cards | Seller's badge (1/2/3) prominently displayed on all search results |
 
 ---
 
-## Phase 5 — Messaging (Sprints 10–11)
+## Phase 5 — Secure Messaging & Intel (Sprints 10–11)
 
-### Sprint 10 (Weeks 19–20) — Core Messaging UI
+### Sprint 10 (Weeks 19–20) — Encrypted Messaging UI
 
-| ID | Task | Acceptance Criteria |
-|---|---|---|
-| FE-10.1 | Build ThreadList — all conversations, last message preview, unread badge | Thread list renders with accurate unread counts |
-| FE-10.2 | Build MessageThread — message bubbles, send input, chronological order | Messages display correctly, new messages appear on send |
-| FE-10.3 | Build MessageBubble — sent (right, primary), received (left, surface) | Bubble styling matches sender/recipient with timestamps |
-| FE-10.4 | Implement 10-second message polling | New messages appear within 10 seconds of being sent |
-| FE-10.5 | Build mobile message layout — full-screen thread view | Thread takes full screen on mobile with back button |
-
-### Sprint 11 (Weeks 21–22) — Messaging Polish
+**Goal:** Secure, monitored communication for Pro users.
 
 | ID | Task | Acceptance Criteria |
 |---|---|---|
-| FE-11.1 | Build AttachmentUpload — file picker for PDF and images | Files selectable, size validated (10MB), upload with progress |
-| FE-11.2 | Build ContactWarningBanner — shown for first 3 messages | Banner appears and counts down from 3 correctly |
-| FE-11.3 | Unread badge on sidebar/bottom nav messaging icon | Badge updates as new messages arrive |
-| FE-11.4 | Mobile polish: messaging at 375px | Thread list and thread view fully functional on mobile |
+| FE-10.1 | Build Messaging Dashboard — ThreadList & MessageThread | Clean UI for exchanging encrypted messages; polling-based updates |
+| FE-10.2 | Build PII Detection Alerts — Contact Warning Banner | Visual alert shown in first 3 messages if phone/email patterns detected |
+| FE-10.3 | Implement Messaging Unlock Flow — Inquiry-Gated Access | Thread only navigable after a formal inquiry has been sent |
 
-**Deliverable:** Complete messaging interface with threads, attachments, contact warning, and polling.
+### Sprint 11 (Weeks 21–22) — Live Intelligence UI (Market Pulse Pro)
+
+**Goal:** Real-time data and historical trends for Pro subscribers.
+
+| ID | Task | Acceptance Criteria |
+|---|---|---|
+| FE-11.1 | Build Market Pulse Pro View — Live Price Table | Removes "7-day lag" banner; shows latest prices with status indicators |
+| FE-11.2 | Build Interactive Price History Charts — Recharts integration | Trend analysis charts for commodity/state pairs over time |
 
 ---
 
