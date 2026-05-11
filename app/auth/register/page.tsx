@@ -22,19 +22,32 @@ type RegisterSchema = z.infer<typeof registerSchema>;
 
 export default function RegisterPage() {
   const router = useRouter();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const { isAuthenticated, isLoading } = useAuthStore((state) => ({
+    isAuthenticated: state.isAuthenticated,
+    isLoading: state.isLoading,
+  }));
   const [serverError, setServerError] = useState('');
   const [success, setSuccess] = useState(false);
 
   React.useEffect(() => {
-    if (isAuthenticated) {
-      router.replace('/dashboard'); // or standard protected route
+    if (!isLoading && isAuthenticated) {
+      router.replace('/dashboard');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, isLoading, router]);
 
   const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<RegisterSchema>({
     resolver: zodResolver(registerSchema),
   });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-surface flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (isAuthenticated) return null;
 
   const onSubmit = async (data: RegisterSchema) => {
     try {

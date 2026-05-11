@@ -9,18 +9,25 @@ import { Loader2 } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const { isAuthenticated, isLoading } = useAuthStore((state) => ({
+    isAuthenticated: state.isAuthenticated,
+    isLoading: state.isLoading,
+  }));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    if (!isAuthenticated) {
+  }, []);
+
+  useEffect(() => {
+    // Only redirect if hydration is finished and user is not authenticated
+    if (isMounted && !isLoading && !isAuthenticated) {
       router.replace('/auth/login');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, isLoading, isMounted, router]);
 
-  if (!isMounted) {
+  if (!isMounted || isLoading) {
     return (
       <div className="min-h-screen bg-surface flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />

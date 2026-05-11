@@ -19,19 +19,32 @@ type LoginSchema = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
   const router = useRouter();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const { isAuthenticated, isLoading } = useAuthStore((state) => ({
+    isAuthenticated: state.isAuthenticated,
+    isLoading: state.isLoading,
+  }));
   const setCredentials = useAuthStore((state) => state.setCredentials);
   const [serverError, setServerError] = useState('');
 
   React.useEffect(() => {
-    if (isAuthenticated) {
-      router.replace('/dashboard'); // or standard protected route
+    if (!isLoading && isAuthenticated) {
+      router.replace('/dashboard');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, isLoading, router]);
 
   const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
   });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-surface flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (isAuthenticated) return null;
 
   const onSubmit = async (data: LoginSchema) => {
     try {
