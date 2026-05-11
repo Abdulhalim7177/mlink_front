@@ -72,7 +72,7 @@
 
 ---
 
-## Phase 3 — Free Tier (Sprints 6–7)
+## Phase 3 — Basic Plan (Sprints 6–7)
 
 ### Sprint 6 — Market Pulse & Directory
 
@@ -80,20 +80,20 @@
 |---|---|---|---|---|
 | D-6.1 | `GET /market-pulse/prices` — tier-based lag logic | 🔲 | FE Market Pulse page, DataLagBanner | FE-6.3 |
 | D-6.2 | `POST /admin/market-pulse/price` — manual entry | 🔲 | FE admin price management page | FE (admin) |
-| D-6.3 | Business directory API — profiles without contacts for Free | 🔲 | FE marketplace page, BusinessCard | FE-6.1, FE-6.2 |
+| D-6.3 | Business directory API — profiles without contacts for Basic | 🔲 | FE marketplace page, BusinessCard | FE-6.1, FE-6.2 |
 | D-6.4 | Tier gate middleware — `TIER_UPGRADE_REQUIRED` responses | 🔲 | FE UpgradePrompt integration | FE-7.4 |
 
-### Sprint 7 — Free Tier Polish
+### Sprint 7 — Basic Plan Polish
 
 | # | Backend Deliverable | Status | Frontend Dependency | FE Task Blocked |
 |---|---|---|---|---|
-| D-7.1 | `GET /users/:id/profile` — contact hidden for Free | 🔲 | FE profile view page | FE-7.1 (part) |
+| D-7.1 | `GET /users/:id/profile` — contact hidden for Basic | 🔲 | FE profile view page | FE-7.1 (part) |
 | D-7.2 | Trade guides API — list + download | 🔲 | FE Knowledge Hub page | FE-7.1 |
-| D-7.3 | Upgrade prompt data in tier gate errors | 🔲 | FE UpgradePrompt content | FE-5.4 |
+| D-7.3 | Upgrade prompt data in plan gate errors | 🔲 | FE UpgradePrompt content | FE-5.4 |
 
 ---
 
-## Phase 4 — Beta Listings (Sprints 8–9)
+## Phase 4 — Pro Listings (Sprints 8–9)
 
 ### Sprint 8 — Listing CRUD
 

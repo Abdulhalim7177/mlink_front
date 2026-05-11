@@ -98,7 +98,7 @@ export default function Home() {
                 </Link>
                 <Link href="/auth/register" className="flex items-center justify-center bg-white hover:bg-surface text-text-primary px-8 py-4 rounded-xl font-bold text-lg border border-border shadow-sm hover:shadow-md transition-all">
                   <Star className="w-5 h-5 mr-2 text-accent" />
-                  Join Free Today
+                  Start Basic — Free
                 </Link>
               </div>
 
@@ -242,7 +242,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing Tiers */}
+      {/* Pricing Plans */}
       <section id="pricing" className="py-24 bg-surface px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 fade-in-up">
@@ -251,10 +251,10 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Free Tier */}
+            {/* Basic Plan */}
             <div className="tier-card group relative bg-white rounded-2xl p-8 border border-border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 fade-in-up">
               <div className="mb-4">
-                <h3 className="text-xl font-bold text-text-primary group-hover:text-primary transition-colors">Free Tier</h3>
+                <h3 className="text-xl font-bold text-text-primary group-hover:text-primary transition-colors">Basic Plan</h3>
                 <p className="text-sm text-text-secondary">Essential tools for starters</p>
               </div>
               <div className="text-4xl font-bold text-text-primary mb-6">₦0<span className="text-base font-normal text-text-muted">/mo</span></div>
@@ -264,16 +264,16 @@ export default function Home() {
                 <li className="flex items-center text-sm text-text-secondary"><Check className="w-4 h-4 text-success mr-3" /> Trade Guides (PDFs)</li>
               </ul>
               <button className="w-full py-3 rounded-lg border-2 border-border font-semibold text-text-primary group-hover:border-primary group-hover:text-primary transition-all">
-                Get Started
+                Start Basic — Free
               </button>
             </div>
 
-            {/* Beta Tier */}
+            {/* Pro Plan */}
             <div className="tier-card group relative bg-white rounded-2xl p-8 border-2 border-primary shadow-xl scale-105 z-10 fade-in-up delay-100">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold tracking-wide shadow-lg">POPULAR</div>
               <div className="mb-4">
-                <h3 className="text-xl font-bold text-text-primary group-hover:text-primary transition-colors">Beta Seller</h3>
-                <p className="text-sm text-text-secondary">For established suppliers</p>
+                <h3 className="text-xl font-bold text-text-primary group-hover:text-primary transition-colors">Pro Plan</h3>
+                <p className="text-sm text-text-secondary">For established traders</p>
               </div>
               <div className="text-4xl font-bold text-text-primary mb-6">₦100,000<span className="text-base font-normal text-text-muted">/mo</span></div>
               <ul className="space-y-4 mb-8">
@@ -283,19 +283,19 @@ export default function Home() {
                 <li className="flex items-center text-sm text-text-secondary"><Check className="w-4 h-4 text-primary mr-3" /> Verified Badge (Level 2)</li>
               </ul>
               <button className="w-full py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary-light/30">
-                Join Beta
+                Join Pro
               </button>
             </div>
 
-            {/* Premium Tier */}
+            {/* Enterprise Plan */}
             <div className="tier-card group relative bg-white rounded-2xl p-8 border border-border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 fade-in-up delay-200">
               <div className="mb-4">
-                <h3 className="text-xl font-bold text-text-primary group-hover:text-accent transition-colors">Power Buyer</h3>
-                <p className="text-sm text-text-secondary">For high-volume sourcing</p>
+                <h3 className="text-xl font-bold text-text-primary group-hover:text-accent transition-colors">Enterprise</h3>
+                <p className="text-sm text-text-secondary">For high-volume operations</p>
               </div>
               <div className="text-4xl font-bold text-text-primary mb-6">₦35,000<span className="text-base font-normal text-text-muted">/mo</span></div>
               <ul className="space-y-4 mb-8">
-                <li className="flex items-center text-sm text-text-secondary"><Check className="w-4 h-4 text-accent mr-3" /> Everything in Beta Buyer</li>
+                <li className="flex items-center text-sm text-text-secondary"><Check className="w-4 h-4 text-accent mr-3" /> Everything in Pro</li>
                 <li className="flex items-center text-sm text-text-secondary"><Check className="w-4 h-4 text-accent mr-3" /> Unlimited Inquiries</li>
                 <li className="flex items-center text-sm text-text-secondary"><Check className="w-4 h-4 text-accent mr-3" /> 10 AI Matches / Month</li>
                 <li className="flex items-center text-sm text-text-secondary"><Check className="w-4 h-4 text-accent mr-3" /> Dedicated Support</li>

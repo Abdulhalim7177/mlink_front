@@ -45,8 +45,8 @@ export default function MarketplacePage() {
             lga: 'Ikeja',
             commodities: ['Cocoa', 'Cashew Nuts', 'Palm Oil'],
             badgeLevel: 2,
-            tier: 'BETA_SELLER',
-            contactHidden: user?.tier === 'FREE',
+            tier: 'PRO',
+            contactHidden: user?.tier === 'BASIC',
           },
           {
             id: '2',
@@ -55,8 +55,8 @@ export default function MarketplacePage() {
             state: 'Kano',
             commodities: ['Sesame Seeds', 'Groundnuts'],
             badgeLevel: 3,
-            tier: 'PREMIUM',
-            contactHidden: user?.tier === 'FREE',
+            tier: 'ENTERPRISE',
+            contactHidden: user?.tier === 'BASIC',
           },
           {
             id: '3',
@@ -66,8 +66,8 @@ export default function MarketplacePage() {
             lga: 'Abeokuta',
             commodities: ['Ginger', 'Hibiscus (Zobo)'],
             badgeLevel: 1,
-            tier: 'BETA_BUYER',
-            contactHidden: user?.tier === 'FREE',
+            tier: 'PRO',
+            contactHidden: user?.tier === 'BASIC',
           },
         ]);
         setLoading(false);
@@ -184,7 +184,7 @@ export default function MarketplacePage() {
                   <BusinessCard
                     key={business.id}
                     {...business}
-                    viewerTier={user?.tier || 'FREE'}
+                    viewerTier={user?.tier || 'BASIC'}
                   />
                 ))}
               </div>

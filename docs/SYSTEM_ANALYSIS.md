@@ -9,7 +9,7 @@
 
 Market-Link is a verified B2B trade and investment intelligence platform targeting the Nigerian market. It addresses three critical problems in Nigerian B2B commerce: counterparty fraud (estimated $2B+ lost annually), commodity price opacity exploited by middlemen, and the absence of a trusted, verified B2B business directory.
 
-The platform operates across three product tiers — Free, Beta, and Premium (post-MVP) — with a 10-step verification engine that establishes trust before any business can participate in the marketplace.
+The platform operates across three product tiers — BASIC, Beta, and ENTERPRISE (post-MVP) — with a 10-step verification engine that establishes trust before any business can participate in the marketplace.
 
 ---
 
@@ -27,17 +27,17 @@ The platform operates across three product tiers — Free, Beta, and Premium (po
 
 ### Primary Objectives
 1. Build a 10-step verification engine that establishes provable trust for every business on the platform
-2. Deliver a functional Free Tier marketplace that drives user acquisition and demonstrates platform value
-3. Enable verified B2B listings with inquiry flows, search, and filtering for Beta tier subscribers
+2. Deliver a functional Basic Plan marketplace that drives user acquisition and demonstrates platform value
+3. Enable verified B2B listings with inquiry flows, search, and filtering for Pro plan subscribers
 4. Provide encrypted secure messaging between verified businesses
 5. Build a services marketplace connecting businesses with verified trade service providers
 6. Integrate Paystack for subscription management and service commission processing
 7. Deploy an AI-powered matchmaker that recommends compatible trading partners
 
 ### Secondary Objectives
-1. Establish Market Pulse commodity price intelligence with tiered data access
+1. Establish Market Pulse commodity price intelligence with plan-based data access
 2. Build an admin platform for verification queue management, listing moderation, and analytics
-3. Design for future Premium tier features (Deal Room, Contract Facilitation, Escrow) without architectural rework
+3. Design for future Enterprise plan features (Deal Room, Contract Facilitation, Escrow) without architectural rework
 
 ---
 
@@ -48,11 +48,11 @@ The platform operates across three product tiers — Free, Beta, and Premium (po
 | Persona | Description | Tier | Primary Actions |
 |---|---|---|---|
 | **Unverified Visitor** | Registered but not yet through verification | None | Complete onboarding (S1–S10) |
-| **Free Browser** | Verified but on free plan | Free | Browse directory, view lagged prices, download trade guides |
-| **Active Buyer** | Beta subscriber looking to source commodities | Beta Buyer | Search listings, send inquiries, message sellers, view AI matches |
+| **BASIC Browser** | Verified but on BASIC plan | BASIC | Browse directory, view lagged prices, download trade guides |
+| **Active Buyer** | Beta subscriber looking to source commodities | Pro | Search listings, send inquiries, message sellers, view AI matches |
 | **Power Buyer** | High-volume buyer with more AI quota | Beta Power Buyer | All buyer actions + higher AI query limits |
-| **Verified Seller** | Beta subscriber listing commodities for sale | Beta Seller | Create/manage listings, receive inquiries, message buyers |
-| **Service Provider** | Verified provider of trade services (logistics, legal, etc.) | Beta Seller | List services, receive bookings, earn via split payments |
+| **Verified Seller** | Beta subscriber listing commodities for sale | Pro | Create/manage listings, receive inquiries, message buyers |
+| **Service Provider** | Verified provider of trade services (logistics, legal, etc.) | Pro | List services, receive bookings, earn via split payments |
 | **Platform Admin** | WebCortex operations team member | Admin | Review verifications, moderate listings, manage prices, view analytics |
 
 ### Stakeholders
@@ -87,8 +87,8 @@ The platform operates across three product tiers — Free, Beta, and Premium (po
 - FR-2.4: State S4 (Document Submission) supports upload of CAC certificate, business ID, director's ID, TIN certificate, bank statement
 - FR-2.5: State S5 (Readiness Score) auto-calculates from profile completeness (30%), document count (40%), and sector risk (30%)
 - FR-2.6: State S6 (Admin Review) requires manual admin decision: approve, reject (with reason), or request more documents
-- FR-2.7: State S7 (Profile Structuring) assigns match tags, sector classification, and tier eligibility
-- FR-2.8: State S8 (Tier Assignment) handles both Free path (skip payment) and Beta path (Paystack)
+- FR-2.7: State S7 (Profile Structuring) assigns match tags, sector classification, and plan eligibility
+- FR-2.8: State S8 (Tier Assignment) handles both BASIC path (skip payment) and Pro path (Paystack)
 - FR-2.9: State S9 (Badge Assignment) assigns badge level 1–3 based on tier and readiness score
 - FR-2.10: State S10 (Marketplace Activation) makes user fully active — can browse, list, inquire, message
 
@@ -102,7 +102,7 @@ The platform operates across three product tiers — Free, Beta, and Premium (po
 - FR-3.7: Analytics dashboard: verification funnel, MRR, AI usage, churn rate
 - FR-3.8: All admin decisions logged in AdminAction table with timestamp
 
-### FR-4: Free Tier Marketplace
+### FR-4: Basic Plan Marketplace
 - FR-4.1: Business directory with grid of verified business cards (name, sector, state, badge level, commodity tags)
 - FR-4.2: Filters by state, sector, commodity, business type
 - FR-4.3: Search with debounced input (300ms)
@@ -111,16 +111,16 @@ The platform operates across three product tiers — Free, Beta, and Premium (po
 - FR-4.6: Trade Knowledge Hub with downloadable PDF guides
 - FR-4.7: Every gated feature shows upgrade prompt with specific feature name, Beta pricing, and CTA
 
-### FR-5: Beta Verified Listings
+### FR-5: Pro Verified Listings
 - FR-5.1: Sellers create listings with: title, commodity type, description, quantity, price, delivery terms, location, photos (up to 5), validity (max 90 days)
 - FR-5.2: Listings enter PENDING_REVIEW status; admin approves or rejects
 - FR-5.3: Listing statuses: DRAFT → PENDING_REVIEW → LIVE → PAUSED / EXPIRED / REJECTED
-- FR-5.4: Sellers limited to 5 active listings (Beta Seller tier)
+- FR-5.4: Sellers limited to 5 active listings (Pro tier)
 - FR-5.5: Full-text search using PostgreSQL `tsvector` with GIN index
 - FR-5.6: Filters: commodity, state, price range, delivery terms, sort by relevance/date/price
 
 ### FR-6: Buyer Search & Inquiry
-- FR-6.1: Beta Buyers can send structured inquiries on listings
+- FR-6.1: Pros can send structured inquiries on listings
 - FR-6.2: Inquiry contains: quantity of interest, unit, preferred delivery, message
 - FR-6.3: Inquiry quota: 5/month for Active Buyer, unlimited for Power Buyer
 - FR-6.4: Inquiry statuses: SENT → VIEWED → RESPONDED → DEAL_INITIATED → CLOSED
@@ -135,16 +135,16 @@ The platform operates across three product tiers — Free, Beta, and Premium (po
 - FR-7.6: Polling-based message updates (10-second interval); WebSocket post-MVP
 
 ### FR-8: Paystack Subscriptions
-- FR-8.1: Three subscription plans: Beta Seller (₦100,000/mo), Active Buyer (₦15,000/mo), Power Buyer (₦35,000/mo)
+- FR-8.1: Three subscription plans: Pro (₦100,000/mo), Active Buyer (₦15,000/mo), Power Buyer (₦35,000/mo)
 - FR-8.2: Payment flow: Backend creates Paystack reference → Frontend opens popup → User pays → Webhook processes
 - FR-8.3: Paystack webhook is the source of truth — never update tier from popup callback alone
 - FR-8.4: Events handled: `charge.success`, `subscription.disable`, `invoice.payment_failed`
-- FR-8.5: Free users skip payment — S7 → S9 → S10 directly
+- FR-8.5: BASIC users skip payment — S7 → S9 → S10 directly
 
 ### FR-9: Market Pulse
 - FR-9.1: Commodity price data for 20 commodities across 10 Nigerian states
 - FR-9.2: Data sources: NCX feed, AFEX feed (post-MOU), platform transactions, manual admin entry
-- FR-9.3: Free tier sees data delayed by 7 days; Beta tier sees current data
+- FR-9.3: Basic Plan sees data delayed by 7 days; Pro plan sees current data
 - FR-9.4: Price alerts: users set target price + direction (above/below); daily cron checks and emails
 - FR-9.5: Admin data health check flags commodity/state pairs not updated in 48 hours
 
@@ -196,7 +196,7 @@ The platform operates across three product tiers — Free, Beta, and Premium (po
 | Constraint | Description |
 |---|---|
 | **Team size** | 2 developers initially; documentation must support onboarding new developers at any point |
-| **Budget** | Free-tier infrastructure only during development; paid services (Paystack, Africa's Talking) use test/sandbox credentials |
+| **Budget** | BASIC-tier infrastructure only during development; paid services (Paystack, Africa's Talking) use test/sandbox credentials |
 | **Local development** | No cloud infrastructure during development — local PostgreSQL, local file storage, SMTP email |
 | **Third-party dependencies** | Africa's Talking (OTP SMS), Paystack (payments) — platform cannot launch without sandbox credentials for both |
 | **Data sources** | Market Pulse data is manually entered by admin at MVP; NCX/AFEX API feeds require signed MOUs |
@@ -217,8 +217,8 @@ Every user passes through these states sequentially. The `verificationStatus` fi
 | S4 | `PENDING_SCORE` | Documents uploaded and confirmed | S5 (auto: score Lambda runs) | BE + FE |
 | S5 | `PENDING_REVIEW` | Readiness score calculated | S6 (admin approves) or stays (more docs) | BE + FE (admin) |
 | S6 | `REJECTED` | Admin rejects (with reason) | Can resubmit → back to S4 | BE + FE |
-| S7 | `PENDING_PAYMENT` | Admin approves → profile structuring runs | S8 (Free path) or S8 (payment) | BE |
-| S8 | `ACTIVE_FREE` or `ACTIVE_BETA` | Tier assigned (Free skips payment) | S9 (auto: badge assignment) | BE |
+| S7 | `PENDING_PAYMENT` | Admin approves → profile structuring runs | S8 (BASIC path) or S8 (payment) | BE |
+| S8 | `ACTIVE_BASIC` or `ACTIVE_BETA` | Tier assigned (BASIC skips payment) | S9 (auto: badge assignment) | BE |
 | S9 | `BADGE_ASSIGNED` | Badge level assigned (1/2/3) | S10 (auto: activation) | BE |
 | S10 | `MARKETPLACE_ACTIVE` | Full marketplace access granted | — (terminal active state) | BE + FE |
 
@@ -226,7 +226,7 @@ Every user passes through these states sequentially. The `verificationStatus` fi
 - Only one active state at a time
 - No backward transitions (except REJECTED → resubmit → S4)
 - Every transition logged in `AdminAction` table with timestamp
-- Free users skip payment step — S7 → S9 → S10 with badge level 1
+- BASIC users skip payment step — S7 → S9 → S10 with badge level 1
 
 ---
 
@@ -234,13 +234,13 @@ Every user passes through these states sequentially. The `verificationStatus` fi
 
 | Tier | Monthly Cost | Listing Limit | Inquiry Limit | AI Queries | Messaging | Market Pulse |
 |---|---|---|---|---|---|---|
-| **Free** | ₦0 | 0 | 0 | 0 | No | 7-day delayed |
-| **Beta Buyer** | ₦15,000 | 0 | 5/month | 5/month | Yes | Live |
+| **BASIC** | ₦0 | 0 | 0 | 0 | No | 7-day delayed |
+| **Pro** | ₦15,000 | 0 | 5/month | 5/month | Yes | Live |
 | **Beta Power Buyer** | ₦35,000 | 0 | Unlimited | 10/month | Yes | Live |
-| **Beta Seller** | ₦100,000 | 5 | Unlimited (receiving) | 5/month | Yes | Live |
-| **Premium** | ₦300,000 | Unlimited | Unlimited | Unlimited | Yes + Deal Room | Live + Alerts |
+| **Pro** | ₦100,000 | 5 | Unlimited (receiving) | 5/month | Yes | Live |
+| **ENTERPRISE** | ₦300,000 | Unlimited | Unlimited | Unlimited | Yes + Deal Room | Live + Alerts |
 
-> Premium tier is documented for architectural awareness but is **not in MVP scope**.
+> Enterprise plan is documented for architectural awareness but is **not in MVP scope**.
 
 ---
 
@@ -250,16 +250,16 @@ Every user passes through these states sequentially. The `verificationStatus` fi
 **Actor:** Business Owner
 **Flow:** Register with email/phone → Verify OTP → Complete business profile → Upload verification documents → Wait for admin review → Receive approval/rejection → Access marketplace
 
-### UC-2: Free Tier Market Browsing
-**Actor:** Free User
+### UC-2: Basic Plan Market Browsing
+**Actor:** BASIC User
 **Flow:** Browse business directory → View business cards (no contact details) → View lagged commodity prices → Download trade guides → Encounter upgrade prompts on gated features
 
 ### UC-3: Seller Lists a Commodity
-**Actor:** Beta Seller
+**Actor:** Pro
 **Flow:** Create listing with commodity details + photos → Submit for admin review → Receive approval notification → Listing appears in buyer search results → Receive inquiries from buyers
 
 ### UC-4: Buyer Searches and Inquires
-**Actor:** Beta Buyer
+**Actor:** Pro
 **Flow:** Search listings by commodity/state/price → View listing details → Send structured inquiry (within monthly quota) → Seller receives notification → Begin messaging thread
 
 ### UC-5: Secure Business Messaging
@@ -275,7 +275,7 @@ Every user passes through these states sequentially. The `verificationStatus` fi
 **Flow:** View weekly AI-generated matches → Review compatibility scores and reasoning → Send introduction to interesting match → Provide thumbs up/down feedback → Matches improve over time
 
 ### UC-8: Service Booking
-**Actor:** Beta Buyer + Service Provider
+**Actor:** Pro + Service Provider
 **Flow:** Buyer searches for trade service → Selects provider → Creates booking request → Provider confirms → Buyer pays via Paystack (93/7 split) → Service completed → TIS updated for both parties
 
 ---

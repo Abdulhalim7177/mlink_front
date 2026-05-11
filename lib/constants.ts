@@ -79,12 +79,11 @@ export const VERIFICATION_STATUS_CONFIG: Record<string, { label: string; color: 
   SUSPENDED:          { label: 'Suspended',          color: 'text-red-700',    bg: 'bg-red-50' },
 };
 
-// ─── Tier Labels ───────────────────────────────────────────────────────────────
+// ─── Plan Labels ───────────────────────────────────────────────────────────────
 export const TIER_CONFIG: Record<string, { label: string; color: string; bg: string }> = {
-  FREE:         { label: 'Free Tier',    color: 'text-gray-700',    bg: 'bg-gray-100' },
-  BETA_BUYER:   { label: 'Beta Buyer',   color: 'text-blue-700',    bg: 'bg-blue-50' },
-  BETA_SELLER:  { label: 'Beta Seller',  color: 'text-emerald-700', bg: 'bg-emerald-50' },
-  PREMIUM:      { label: 'Premium',      color: 'text-amber-700',   bg: 'bg-amber-50' },
+  BASIC:       { label: 'Basic',       color: 'text-gray-700',    bg: 'bg-gray-100' },
+  PRO:         { label: 'Pro',         color: 'text-emerald-700', bg: 'bg-emerald-50' },
+  ENTERPRISE:  { label: 'Enterprise',  color: 'text-amber-700',   bg: 'bg-amber-50' },
 };
 
 // ─── Document Status Labels ────────────────────────────────────────────────────

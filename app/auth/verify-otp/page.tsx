@@ -54,7 +54,7 @@ function VerifyOTPContent() {
       
       // If the API returns accessToken locally based on verification completion
       if (response.data.data?.accessToken && response.data.data?.user) {
-         setCredentials(response.data.data.user, response.data.data.accessToken);
+         setCredentials(response.data.data.user, response.data.data.accessToken, response.data.data.refreshToken || '');
          router.push('/dashboard');
       } else {
          // Fallback just in case they need to log in manually afterward

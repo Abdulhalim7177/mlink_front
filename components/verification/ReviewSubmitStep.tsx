@@ -64,7 +64,7 @@ export default function ReviewSubmitStep({ onNext, onBack }: Props) {
           </li>
           <li className="flex items-start">
             <CheckCircle2 className="w-5 h-5 text-accent mr-3 shrink-0" />
-            <span>You will receive an email upon complete tier verification.</span>
+            <span>You will receive an email upon complete plan verification.</span>
           </li>
         </ul>
       </div>

@@ -109,7 +109,7 @@ Full admin authentication and verification queue management.
 | SM-4.4 | Queue items include SLA breach flag | Items older than 24 hours have `slaBreached: true` | 🔲 |
 | SM-4.5 | User review returns full profile + doc URLs | `GET /admin/users/:id` → profile data + downloadable document URLs | 🔲 |
 | SM-4.6 | Document URLs are accessible | Download URL from SM-4.5 → file downloads correctly | 🔲 |
-| SM-4.7 | Approve triggers full pipeline (Free path) | `POST /admin/queue/:id/approve` → user status reaches `MARKETPLACE_ACTIVE` | 🔲 |
+| SM-4.7 | Approve triggers full pipeline (BASIC path) | `POST /admin/queue/:id/approve` → user status reaches `MARKETPLACE_ACTIVE` | 🔲 |
 | SM-4.8 | Reject sends email with reason | `POST /admin/queue/:id/reject` → user receives email with rejection reason | 🔲 |
 
 ---
@@ -120,10 +120,10 @@ Full admin authentication and verification queue management.
 
 | # | Metric | How to Verify | Pass/Fail |
 |---|---|---|---|
-| SM-6.1 | Free user sees lagged prices | `GET /market-pulse/prices` as Free user → prices ≥ 7 days old | 🔲 |
+| SM-6.1 | BASIC user sees lagged prices | `GET /market-pulse/prices` as BASIC user → prices ≥ 7 days old | 🔲 |
 | SM-6.2 | Beta user sees current prices | `GET /market-pulse/prices` as Beta user → prices from today/yesterday | 🔲 |
-| SM-6.3 | Directory hides contact for Free | `GET /users/:id/profile` as Free → no `email`, `phone` in response | 🔲 |
-| SM-6.4 | Tier gate returns upgrade info | Free user hits gated endpoint → 403 with `code: "TIER_UPGRADE_REQUIRED"` + pricing data | 🔲 |
+| SM-6.3 | Directory hides contact for BASIC | `GET /users/:id/profile` as BASIC → no `email`, `phone` in response | 🔲 |
+| SM-6.4 | plan gate returns upgrade info | BASIC user hits gated endpoint → 403 with `code: "PLAN_UPGRADE_REQUIRED"` + pricing data | 🔲 |
 | SM-6.5 | At least 3 commodity/state pairs have price data | Prices exist for testing (admin seeded or manually entered) | 🔲 |
 
 ---
@@ -134,7 +134,7 @@ Full admin authentication and verification queue management.
 
 | # | Metric | How to Verify | Pass/Fail |
 |---|---|---|---|
-| SM-8.1 | Listing creation returns listing ID | `POST /listings` as Beta Seller → 201 with `listingId` | 🔲 |
+| SM-8.1 | Listing creation returns listing ID | `POST /listings` as Pro → 201 with `listingId` | 🔲 |
 | SM-8.2 | Listing limits enforced (5 active) | Create 6th listing → 400/403 with limit error | 🔲 |
 | SM-8.3 | Photo upload works on listings | Upload photo → reference stored on listing | 🔲 |
 | SM-8.4 | Admin can approve listing | `POST /admin/listings/:id/approve` → listing status = LIVE | 🔲 |

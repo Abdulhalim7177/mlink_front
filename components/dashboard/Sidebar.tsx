@@ -42,10 +42,9 @@ export default function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boo
     : user?.email.split('@')[0];
 
   const tierMap: Record<string, string> = {
-    'FREE': 'Standard User',
-    'BETA_BUYER': 'Beta Buyer',
-    'BETA_SELLER': 'Beta Seller',
-    'PREMIUM': 'Premium Investor',
+    'BASIC': 'Standard User',
+    'PRO': 'Pro Member',
+    'ENTERPRISE': 'Enterprise Investor',
     'ADMIN': 'Platform Admin'
   };
 

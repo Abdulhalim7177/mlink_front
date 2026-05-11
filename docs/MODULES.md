@@ -12,8 +12,8 @@
 | FM1 | Authentication Pages | `(auth)` | Phase 1 | S2–S3 | P0 |
 | FM2 | Onboarding Flow | `(onboarding)` | Phase 1–2 | S3–S4 | P0 |
 | FM3 | Admin Dashboard | `(admin)` | Phase 2–3 | S4–S7 | P0 |
-| FM4 | Free Tier Marketplace | `(app)` | Phase 3 | S6–S7 | P0 |
-| FM5 | Beta Listings & Search | `(app)` | Phase 4 | S8–S9 | P0 |
+| FM4 | Basic Plan Marketplace | `(app)` | Phase 3 | S6–S7 | P0 |
+| FM5 | Pro Listings & Search | `(app)` | Phase 4 | S8–S9 | P0 |
 | FM6 | Inquiry Flow | `(app)` | Phase 4 | S9 | P0 |
 | FM7 | Secure Messaging UI | `(app)` | Phase 5 | S10–S11 | P0 |
 | FM8 | Market Pulse UI | `(app)` | Phase 3 | S6 | P0 |
@@ -94,18 +94,18 @@ Separate admin layout with admin-specific sidebar navigation. Not accessible to 
 
 ---
 
-## FM4 — Free Tier Marketplace
+## FM4 — Basic Plan Marketplace
 
 ### Pages
 | Route | Page | Description |
 |---|---|---|
 | `/marketplace` | Business Directory | Grid of verified business cards with filters |
-| `/marketplace/:id` | Business/Listing Detail | Business profile (contact hidden for Free) |
+| `/marketplace/:id` | Business/Listing Detail | Business profile (contact hidden for BASIC) |
 | `/market-pulse` | Commodity Prices | Price table with 7-day lag banner |
 | `/knowledge-hub` | Trade Knowledge Hub | Downloadable trade guides |
 
 ### Key Components
-- **BusinessCard** — Displays: business name, sector, state, verification badge, commodity tags. Contact details hidden for Free — "Contact" button triggers UpgradePrompt
+- **BusinessCard** — Displays: business name, sector, state, verification badge, commodity tags. Contact details hidden for BASIC — "Contact" button triggers UpgradePrompt
 - **FilterPanel** — Desktop: sidebar. Mobile: slide-up drawer. Filters: state, sector, commodity, business type. Search bar with debounced input (300ms)
 - **UpgradePrompt** — The most important conversion component. Shows: specific feature attempted, what Beta provides, pricing (₦15,000/month for buyer), CTA to subscription page. Must appear on every gated action attempt
 - **DataLagBanner** — "You're viewing last week's prices. Beta subscribers see live prices." Persistent and visually prominent
@@ -114,7 +114,7 @@ Separate admin layout with admin-specific sidebar navigation. Not accessible to 
 
 ---
 
-## FM5 — Beta Listings & Search
+## FM5 — Pro Listings & Search
 
 ### Pages
 | Route | Page | Description |
@@ -169,10 +169,10 @@ The message thread polls for new messages every 10 seconds using a client-side i
 ## FM8 — Market Pulse UI
 
 ### Components
-- **PriceTable** — Commodity price grid. Two modes: Free (7-day lag with banner) and Beta (live with "Updated today" badge)
+- **PriceTable** — Commodity price grid. Two modes: BASIC (7-day lag with banner) and Beta (live with "Updated today" badge)
 - **PriceCard** — Single commodity: name, state, price, unit, trend indicator (up/down/stable)
 - **PriceAlertForm** — Set alert: commodity, state, target price, direction (above/below)
-- **DataLagBanner** — Persistent banner for Free users with upgrade CTA
+- **DataLagBanner** — Persistent banner for BASIC users with upgrade CTA
 - **PriceHistoryChart** — Line chart (Recharts) showing price history over 30/60/90 days (Beta only)
 
 ---
@@ -192,9 +192,9 @@ The message thread polls for new messages every 10 seconds using a client-side i
 ### Tiers Displayed
 | Tier | Price | Key Features |
 |---|---|---|
-| Free | ₦0/month | Browse directory, lagged prices, trade guides |
+| BASIC | ₦0/month | Browse directory, lagged prices, trade guides |
 | Active Buyer | ₦15,000/month | 5 inquiries, live prices, AI matches, messaging |
-| Beta Seller | ₦100,000/month | 5 listings, AI matches, messaging, analytics |
+| Pro | ₦100,000/month | 5 listings, AI matches, messaging, analytics |
 
 ---
 
@@ -239,7 +239,7 @@ Components used across multiple modules:
 | Component | Description |
 |---|---|
 | **VerificationBadge** | Shows badge level 0–3 with colour and label |
-| **TierBadge** | FREE / BETA / PREMIUM text badge |
+| **TierBadge** | BASIC / BETA / ENTERPRISE text badge |
 | **UpgradePrompt** | Modal: specific feature name, Beta pricing, upgrade CTA |
 | **EmptyState** | Consistent empty state with icon, message, and action button |
 | **LoadingSpinner** | Animated loading indicator |
@@ -270,7 +270,7 @@ Every page and component must handle these states:
 | **Error** | Clear error message + retry button |
 | **Offline / Network** | "Check your connection" banner |
 | **Session Expired** | Redirect to login with toast |
-| **Tier Gate** | UpgradePrompt modal (never a blank screen) |
+| **plan gate** | UpgradePrompt modal (never a blank screen) |
 
 ---
 

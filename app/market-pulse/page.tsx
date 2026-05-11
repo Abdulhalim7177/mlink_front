@@ -77,7 +77,7 @@ export default function MarketPulsePage() {
           },
         ];
         setPrices(mockPrices);
-        setDataLag(user?.tier === 'FREE' ? '7 days' : 'live');
+        setDataLag(user?.tier === 'BASIC' ? '7 days' : 'live');
         setLoading(false);
       }, 1000);
     } catch (error) {
@@ -149,8 +149,8 @@ export default function MarketPulsePage() {
             <h3 className="text-sm font-semibold text-blue-900">About Market Pulse</h3>
             <p className="mt-1 text-sm text-blue-700">
               Market Pulse provides commodity price data from verified sources across Nigeria.
-              {user?.tier === 'FREE'
-                ? ' Free tier users see prices from 7 days ago. Upgrade to Beta or Premium for live prices.'
+              {user?.tier === 'BASIC'
+                ? ' Basic plan users see prices from 7 days ago. Upgrade to Pro or Enterprise for live prices.'
                 : ' You have access to live market prices.'}
             </p>
           </div>

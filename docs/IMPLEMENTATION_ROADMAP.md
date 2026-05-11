@@ -12,8 +12,8 @@
 |---|---|---|---|---|
 | **1 — Foundation** | S1–S3 | 1–6 | Apr 2 – May 13 | Setup, Auth Pages, Onboarding UI |
 | **2 — Verification + Admin** | S4–S5 | 7–10 | May 14 – Jun 10 | Admin Dashboard, Verification Queue |
-| **3 — Free Tier** | S6–S7 | 11–14 | Jun 11 – Jul 8 | Free Marketplace, Market Pulse, Knowledge Hub |
-| **4 — Beta Listings** | S8–S9 | 15–18 | Jul 9 – Aug 5 | Listing Forms, Search, Inquiry UI |
+| **3 — Basic Plan** | S6–S7 | 11–14 | Jun 11 – Jul 8 | BASIC Marketplace, Market Pulse, Knowledge Hub |
+| **4 — Pro Listings** | S8–S9 | 15–18 | Jul 9 – Aug 5 | Listing Forms, Search, Inquiry UI |
 | **5 — Messaging** | S10–S11 | 19–22 | Aug 6 – Sep 2 | Messaging UI |
 | **6 — Services** | S12–S13 | 23–26 | Sep 3 – Sep 30 | Services Marketplace UI |
 | **7 — Payments** | S14 | 27–28 | Oct 1 – Oct 14 | Subscription Page, Paystack Popup |
@@ -113,15 +113,15 @@
 
 ---
 
-## Phase 3 — Free Tier (Sprints 6–7)
+## Phase 3 — Basic Plan (Sprints 6–7)
 
-### Sprint 6 (Weeks 11–12) — Free Marketplace & Market Pulse
+### Sprint 6 (Weeks 11–12) — BASIC Marketplace & Market Pulse
 
 | ID | Task | Acceptance Criteria |
 |---|---|---|
-| FE-6.1 | Build Free marketplace page — BusinessCard grid, FilterPanel, SearchBar | Directory renders, filters work, search debounced |
-| FE-6.2 | Build BusinessCard component — name, sector, state, badge, commodities | Card renders correctly, "Contact" triggers UpgradePrompt for Free |
-| FE-6.3 | Build Market Pulse Free tier page — PriceTable with DataLagBanner | Prices displayed with "7 days ago" dates, upgrade banner visible |
+| FE-6.1 | Build BASIC marketplace page — BusinessCard grid, FilterPanel, SearchBar | Directory renders, filters work, search debounced |
+| FE-6.2 | Build BusinessCard component — name, sector, state, badge, commodities | Card renders correctly, "Contact" triggers UpgradePrompt for BASIC |
+| FE-6.3 | Build Market Pulse Basic Plan page — PriceTable with DataLagBanner | Prices displayed with "7 days ago" dates, upgrade banner visible |
 | FE-6.4 | Build DataLagBanner — persistent upgrade CTA | Banner clearly says "Last week's prices" with upgrade link |
 | FE-6.5 | Build PriceTable component — commodity, state, price, unit, date | Table renders, horizontal scroll on mobile |
 | FE-6.6 | Build FilterPanel — desktop sidebar, mobile slide-up drawer | Panel behaviour matches breakpoint correctly |
@@ -132,15 +132,15 @@
 |---|---|---|
 | FE-7.1 | Build Trade Knowledge Hub — guide cards, category filter, download | Guide cards render, category filter works, PDFs downloadable |
 | FE-7.2 | Build main app layout — sidebar (desktop), bottom nav (mobile) | Navigation adapts to breakpoint, all links functional |
-| FE-7.3 | Build Dashboard page — role-aware (shows different content for Free/Buyer/Seller) | Dashboard renders appropriate widgets based on user tier |
-| FE-7.4 | Integrate UpgradePrompt across all Free-gated touch points | Every gated action (contact, inquiry, message, AI) shows prompt |
-| FE-7.5 | Mobile polish: all Free tier pages at 375px | All pages mobile-optimised, no layout breaks |
+| FE-7.3 | Build Dashboard page — role-aware (shows different content for BASIC/Buyer/Seller) | Dashboard renders appropriate widgets based on user tier |
+| FE-7.4 | Integrate UpgradePrompt across all BASIC-gated touch points | Every gated action (contact, inquiry, message, AI) shows prompt |
+| FE-7.5 | Mobile polish: all Basic Plan pages at 375px | All pages mobile-optimised, no layout breaks |
 
-**Deliverable:** Free user can browse marketplace, view lagged prices, download guides, see upgrade prompts on all gated features.
+**Deliverable:** BASIC user can browse marketplace, view lagged prices, download guides, see upgrade prompts on all gated features.
 
 ---
 
-## Phase 4 — Beta Listings (Sprints 8–9)
+## Phase 4 — Pro Listings (Sprints 8–9)
 
 ### Sprint 8 (Weeks 15–16) — Listing Creation & Management
 
@@ -241,7 +241,7 @@
 | FE-15.3 | Build match refresh button + loading state (10s timeout) | Refresh triggers, loading shows, list updates |
 | FE-15.4 | Build AI query interface — input, loading, structured answer | Query submits, answer renders with citations |
 | FE-15.5 | Build QuotaMeter — remaining queries display | Quota shown, colour changes at thresholds |
-| FE-15.6 | Build UpgradePrompt for Free users on AI pages | Free users see clear upgrade message |
+| FE-15.6 | Build UpgradePrompt for BASIC users on AI pages | BASIC users see clear upgrade message |
 
 ### Sprint 16 (Weeks 31–32) — Testing & Launch
 
@@ -266,7 +266,7 @@
 | Auth pages | Auth endpoints live | S2 (parallel development) |
 | Onboarding pages | Profile + document endpoints | S3 (parallel development) |
 | Admin queue | Admin endpoints live | S4 (parallel development) |
-| Free marketplace | Directory + Market Pulse endpoints | S6 (parallel development) |
+| BASIC marketplace | Directory + Market Pulse endpoints | S6 (parallel development) |
 | Listing forms | Listing CRUD endpoints | S8 (backend delivers first half of sprint) |
 | Search page | Search endpoint with full-text | S9 (backend delivers mid-sprint) |
 | Messaging | Messaging endpoints | S10 (parallel development) |

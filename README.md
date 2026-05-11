@@ -9,7 +9,7 @@
 
 Market-Link is a verified B2B trade and investment intelligence platform for the Nigerian market. This repository contains the frontend web application — a Next.js 16 app that provides the user interface for registration, onboarding, marketplace browsing, listings, messaging, AI features, and administration.
 
-The frontend communicates exclusively with the backend REST API. All business logic, data validation, and tier enforcement happen on the backend — the frontend is responsible for presentation, form handling, and user experience.
+The frontend communicates exclusively with the backend REST API. All business logic, data validation, and plan enforcement happen on the backend — the frontend is responsible for presentation, form handling, and user experience.
 
 > **Current Implementation Status:** **Sprint 3 Verification UI Completed.** The secure frontend Next.js interface currently supports user Registration mapped natively to persistent Authentication Guards. The Dashboard successfully hydrates algorithmic profile data dynamically routing users to the newly constructed Multi-Step KYC engine featuring explicit binary dropzones before hitting the Admin queue.
 
@@ -126,7 +126,7 @@ The app will be available at `http://localhost:3000`.
 | 0 (None) | `#9B9B97` (grey) | — |
 | 1 (Basic) | `#2563EB` (blue) | Verified |
 | 2 (Full) | `#0A5F38` (green) | Fully Verified |
-| 3 (Premium) | `#D4AF37` (gold) | Premium |
+| 3 (Premium) | `#D4AF37` (gold) | Enterprise |
 
 ### Typography
 - **Headings:** Bricolage Grotesque (distinct, modern, authoritative)
@@ -169,8 +169,8 @@ The majority of Nigerian B2B users access Market-Link on mobile devices. Mobile 
 
 ## Key UI Rules
 
-1. **Never show contact details** for Free users — always show UpgradePrompt
-2. **Always show data age** on Market Pulse (Free: "7 days ago", Beta: "Updated today")
+1. **Never show contact details** for Basic plan users — always show UpgradePrompt
+2. **Always show data age** on Market Pulse (Basic: "7 days ago", Pro: "Updated today")
 3. **Always show quota remaining** when AI features are used
 4. **Verification badge is always prominent** — never hidden or small
 5. **Mobile: all tap targets minimum 44×44px**

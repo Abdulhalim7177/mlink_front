@@ -22,7 +22,7 @@ export function DataLagBanner({ dataLag, onUpgrade }: DataLagBannerProps) {
             You're viewing {dataLag} old prices
           </h3>
           <p className="mt-1 text-sm text-amber-700">
-            Upgrade to Beta or Premium to access live market prices and stay ahead of the market.
+            Upgrade to Pro or Enterprise to access live market prices and stay ahead of the market.
           </p>
         </div>
         <Button

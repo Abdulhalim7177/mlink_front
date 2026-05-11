@@ -36,16 +36,16 @@ mlink_front/
 │   │   ├── layout.tsx                # Sidebar (desktop) + bottom nav (mobile)
 │   │   │
 │   │   ├── dashboard/
-│   │   │   └── page.tsx              # Role-aware dashboard (Free/Buyer/Seller)
+│   │   │   └── page.tsx              # Role-aware dashboard (BASIC/Buyer/Seller)
 │   │   │
 │   │   ├── marketplace/
-│   │   │   ├── page.tsx              # Business directory (Free + Beta)
+│   │   │   ├── page.tsx              # Business directory (BASIC + Beta)
 │   │   │   ├── [id]/
 │   │   │   │   └── page.tsx          # Business/listing detail
 │   │   │   └── search/
 │   │   │       └── page.tsx          # Full search + filters (Beta only)
 │   │   │
-│   │   ├── listings/                 # Beta Seller only
+│   │   ├── listings/                 # Pro only
 │   │   │   ├── page.tsx              # My listings management
 │   │   │   ├── new/
 │   │   │   │   └── page.tsx          # Create new listing
@@ -62,7 +62,7 @@ mlink_front/
 │   │   │       └── page.tsx          # Individual message thread
 │   │   │
 │   │   ├── market-pulse/
-│   │   │   └── page.tsx              # Commodity prices (Free: lagged, Beta: live)
+│   │   │   └── page.tsx              # Commodity prices (BASIC: lagged, Beta: live)
 │   │   │
 │   │   ├── matches/
 │   │   │   └── page.tsx              # AI match recommendations (Beta)
@@ -75,7 +75,7 @@ mlink_front/
 │   │   │       └── page.tsx          # Provider's listings
 │   │   │
 │   │   ├── knowledge-hub/
-│   │   │   └── page.tsx              # Trade guides library (Free)
+│   │   │   └── page.tsx              # Trade guides library (BASIC)
 │   │   │
 │   │   ├── subscription/
 │   │   │   └── page.tsx              # Tier selection + Paystack payment
@@ -126,7 +126,7 @@ mlink_front/
 │   │
 │   ├── shared/                       # Cross-feature components
 │   │   ├── VerificationBadge.tsx     # Badge level 0–3 display
-│   │   ├── TierBadge.tsx             # FREE / BETA / PREMIUM label
+│   │   ├── TierBadge.tsx             # BASIC / BETA / ENTERPRISE label
 │   │   ├── UpgradePrompt.tsx         # Upgrade CTA modal (most important conversion component)
 │   │   ├── EmptyState.tsx            # Consistent "no data" display
 │   │   ├── LoadingSpinner.tsx        # Animated loader
@@ -199,7 +199,7 @@ mlink_front/
 ├── public/                           # Static assets (served directly)
 │   ├── logo.svg                      # Market-Link logo
 │   ├── icons/                        # App icons, favicons
-│   └── guides/                       # Trade guide PDFs (Free tier downloads)
+│   └── guides/                       # Trade guide PDFs (Basic Plan downloads)
 │
 ├── tests/                            # Test files
 │   ├── unit/                         # Component unit tests (Vitest)
@@ -212,7 +212,7 @@ mlink_front/
 │   │   └── ai-query.test.tsx
 │   └── e2e/                          # End-to-end tests (Playwright)
 │       ├── full-onboarding.spec.ts
-│       ├── free-tier-browse.spec.ts
+│       ├── BASIC-tier-browse.spec.ts
 │       ├── beta-buyer-flow.spec.ts
 │       └── admin-review.spec.ts
 │

@@ -17,7 +17,7 @@ export function UpgradePrompt({
   onClose,
   feature,
   description,
-  requiredTier = 'Beta',
+  requiredTier = 'Pro',
 }: UpgradePromptProps) {
   if (!isOpen) return null;
 

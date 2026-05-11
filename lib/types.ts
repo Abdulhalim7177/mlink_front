@@ -16,10 +16,9 @@ export type VerificationStatus =
   | 'SUSPENDED';
 
 export type UserTier =
-  | 'FREE'
-  | 'BETA_BUYER'
-  | 'BETA_SELLER'
-  | 'PREMIUM';
+  | 'BASIC'
+  | 'PRO'
+  | 'ENTERPRISE';
 
 export type UserRole = 'USER' | 'ADMIN';
 

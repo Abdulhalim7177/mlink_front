@@ -142,7 +142,7 @@ export default function AdminUsersPage() {
                     color: 'text-gray-700',
                     bg: 'bg-gray-50',
                   };
-                  const tierConf = TIER_CONFIG[user.tier] || TIER_CONFIG.FREE;
+                  const tierConf = TIER_CONFIG[user.tier] || TIER_CONFIG.BASIC;
                   const isSuspended = user.verificationStatus === 'SUSPENDED';
 
                   return (

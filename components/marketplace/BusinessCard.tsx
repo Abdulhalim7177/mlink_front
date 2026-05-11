@@ -60,7 +60,7 @@ export function BusinessCard({
   const getBadgeLabel = (level: number) => {
     switch (level) {
       case 3:
-        return 'Premium Verified';
+        return 'Enterprise Verified';
       case 2:
         return 'Verified';
       case 1:
@@ -147,8 +147,8 @@ export function BusinessCard({
         isOpen={showUpgradePrompt}
         onClose={() => setShowUpgradePrompt(false)}
         feature="Contact Details"
-        description="Upgrade to Beta or Premium to view full contact information and connect with businesses."
-        requiredTier="Beta"
+        description="Upgrade to Pro or Enterprise to view full contact information and connect with businesses."
+        requiredTier="Pro"
       />
     </>
   );
