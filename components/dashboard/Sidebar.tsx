@@ -52,19 +52,20 @@ export default function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boo
 
   // Navigation Links
   const platformLinks = [
-    { name: 'Dashboard', href: '/dashboard', icon: BarChart2 },
-    { name: 'Market Pulse', href: '/market-pulse', icon: BarChart2 },
-    { name: 'Marketplace', href: '/marketplace', icon: Search },
-    { name: 'AI Matching', href: '/dashboard/ai-matches', icon: Brain },
+    { name: 'Dashboard', href: '/dashboard', icon: LayoutGrid, implemented: true },
+    { name: 'Market Pulse', href: '/dashboard/market-pulse', icon: BarChart2, implemented: true },
+    { name: 'Marketplace', href: '/dashboard/marketplace', icon: Search, implemented: true },
+    { name: 'AI Matching', href: '/dashboard/ai-matches', icon: Brain, implemented: false },
   ];
 
   const managementLinks = [
-    { name: 'Inquiries', href: '/dashboard/inquiries', icon: MessageSquare },
-    { name: 'Deals & Contracts', href: '/dashboard/deals', icon: FileSignature },
+    { name: 'Inquiries', href: '/dashboard/inquiries', icon: MessageSquare, implemented: false },
+    { name: 'Deals & Contracts', href: '/dashboard/deals', icon: FileSignature, implemented: false },
   ];
 
   const activeClass = "bg-gradient-to-r from-accent/10 to-transparent border-l-4 border-accent text-accent";
   const inactiveClass = "text-gray-300 hover:text-white hover:bg-white/5 border-l-4 border-transparent";
+  const disabledClass = "opacity-40 cursor-not-allowed text-gray-500 border-l-4 border-transparent";
 
   // Sidebar Panel Base Class
   const baseSidebarClasses = "w-64 bg-gradient-to-b from-gray-900 to-gray-800 flex flex-col transition-transform duration-300 z-50 absolute md:relative h-full text-gray-300 border-r border-gray-800 shadow-xl";
@@ -109,26 +110,50 @@ export default function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boo
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-4 space-y-1">
           <div className="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Platform</div>
-          {platformLinks.map(link => (
-            <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className={`flex items-center px-6 py-3 text-sm font-medium transition-colors ${pathname === link.href ? activeClass : inactiveClass}`}>
-              <link.icon className="w-5 h-5 mr-3" />
-              {link.name}
-              {link.badge && (
-                <span className="ml-auto bg-accent text-white text-[10px] px-1.5 py-0.5 rounded-full">{link.badge}</span>
-              )}
-            </Link>
-          ))}
+          {platformLinks.map(link => {
+            const active = pathname === link.href;
+            if (!link.implemented) {
+              return (
+                <div key={link.name} className={`flex items-center px-6 py-3 text-sm font-medium ${disabledClass} group relative`}>
+                  <link.icon className="w-5 h-5 mr-3" />
+                  {link.name}
+                  <span className="ml-auto bg-gray-700 text-[8px] px-1.5 py-0.5 rounded text-gray-400">Soon</span>
+                </div>
+              );
+            }
+            return (
+              <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className={`flex items-center px-6 py-3 text-sm font-medium transition-colors ${active ? activeClass : inactiveClass}`}>
+                <link.icon className="w-5 h-5 mr-3" />
+                {link.name}
+                {link.badge && (
+                  <span className="ml-auto bg-accent text-white text-[10px] px-1.5 py-0.5 rounded-full">{link.badge}</span>
+                )}
+              </Link>
+            );
+          })}
 
           <div className="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 mt-6">Management</div>
-          {managementLinks.map(link => (
-            <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className={`flex items-center px-6 py-3 text-sm font-medium transition-colors ${pathname === link.href ? activeClass : inactiveClass}`}>
-              <link.icon className="w-5 h-5 mr-3" />
-              {link.name}
-              {link.badge && (
-                <span className="ml-auto bg-primary text-white text-[10px] px-1.5 py-0.5 rounded-full">{link.badge}</span>
-              )}
-            </Link>
-          ))}
+          {managementLinks.map(link => {
+            const active = pathname === link.href;
+            if (!link.implemented) {
+              return (
+                <div key={link.name} className={`flex items-center px-6 py-3 text-sm font-medium ${disabledClass} group relative`}>
+                  <link.icon className="w-5 h-5 mr-3" />
+                  {link.name}
+                  <span className="ml-auto bg-gray-700 text-[8px] px-1.5 py-0.5 rounded text-gray-400">Soon</span>
+                </div>
+              );
+            }
+            return (
+              <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className={`flex items-center px-6 py-3 text-sm font-medium transition-colors ${active ? activeClass : inactiveClass}`}>
+                <link.icon className="w-5 h-5 mr-3" />
+                {link.name}
+                {link.badge && (
+                  <span className="ml-auto bg-primary text-white text-[10px] px-1.5 py-0.5 rounded-full">{link.badge}</span>
+                )}
+              </Link>
+            );
+          })}
 
           <div className="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 mt-6">Settings</div>
           <Link href="/dashboard/settings" onClick={() => setMobileOpen(false)} className={`flex items-center px-6 py-3 text-sm font-medium transition-colors ${pathname === '/dashboard/settings' ? activeClass : inactiveClass}`}>
