@@ -13,6 +13,7 @@ import {
   Shield,
   LogOut,
   Settings,
+  Package,
 } from 'lucide-react';
 
 export default function AdminSidebar({
@@ -44,6 +45,7 @@ export default function AdminSidebar({
 
   if (isSuper || dep === 'VERIFICATION') {
     navLinks.push({ name: 'Verification Queue', href: `${ADMIN_BASE_PATH}/queue`, icon: ClipboardCheck });
+    navLinks.push({ name: 'Listings', href: `${ADMIN_BASE_PATH}/listings`, icon: Package });
   }
   
   if (isSuper || dep === 'VERIFICATION' || dep === 'CUSTOMER_SERVICE') {

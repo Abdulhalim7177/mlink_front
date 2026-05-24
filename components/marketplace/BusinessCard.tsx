@@ -40,7 +40,7 @@ export function BusinessCard({
       setShowUpgradePrompt(true);
     } else {
       // Navigate to profile or open contact modal
-      window.location.href = `/marketplace/${id}`;
+      window.location.href = `/dashboard/marketplace/${id}`;
     }
   };
 

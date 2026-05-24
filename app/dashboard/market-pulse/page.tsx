@@ -7,6 +7,7 @@ import { DataLagBanner } from '@/components/market-pulse/DataLagBanner';
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner';
 import { useAuthStore } from '@/store/auth.store';
 import { useRouter } from 'next/navigation';
+import api from '@/lib/api';
 
 export default function MarketPulsePage() {
   const { user } = useAuthStore();
@@ -22,66 +23,14 @@ export default function MarketPulsePage() {
   const fetchPrices = async () => {
     setLoading(true);
     try {
-      // TODO: Replace with actual API call
-      // const response = await api.get('/market-pulse/prices');
-      // setPrices(response.data.data.prices);
-      // setDataLag(response.data.data.dataLag);
-
-      // Mock data for now
-      setTimeout(() => {
-        const mockPrices = [
-          {
-            id: '1',
-            commodity: 'Cocoa Beans',
-            state: 'Lagos',
-            price: 280000,
-            unit: 'per tonne',
-            createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-            change: 2.3,
-          },
-          {
-            id: '2',
-            commodity: 'Cashew Nuts',
-            state: 'Kano',
-            price: 450000,
-            unit: 'per tonne',
-            createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-            change: -1.8,
-          },
-          {
-            id: '3',
-            commodity: 'Palm Oil',
-            state: 'Rivers',
-            price: 120000,
-            unit: 'per tonne',
-            createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-            change: 5.2,
-          },
-          {
-            id: '4',
-            commodity: 'Sesame Seeds',
-            state: 'Katsina',
-            price: 380000,
-            unit: 'per tonne',
-            createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-            change: 0.5,
-          },
-          {
-            id: '5',
-            commodity: 'Ginger',
-            state: 'Kaduna',
-            price: 220000,
-            unit: 'per tonne',
-            createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-            change: -3.1,
-          },
-        ];
-        setPrices(mockPrices);
-        setDataLag(user?.tier === 'BASIC' ? '7 days' : 'live');
-        setLoading(false);
-      }, 1000);
+      const response = await api.get('/market-pulse/prices');
+      setPrices(response.data.data.prices || []);
+      setDataLag(response.data.data.dataLag || '7 days');
+      setLoading(false);
     } catch (error) {
       console.error('Failed to fetch prices:', error);
+      setPrices([]);
+      setDataLag('7 days');
       setLoading(false);
     }
   };

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Search, SlidersHorizontal } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { Search, SlidersHorizontal, MapPin, Building2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { BusinessCard } from '@/components/marketplace/BusinessCard';
@@ -9,6 +9,7 @@ import { FilterPanel } from '@/components/marketplace/FilterPanel';
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner';
 import { EmptyState } from '@/components/shared/EmptyState';
 import { useAuthStore } from '@/store/auth.store';
+import api from '@/lib/api';
 
 export default function MarketplacePage() {
   const { user } = useAuthStore();
@@ -23,60 +24,35 @@ export default function MarketplacePage() {
     businessType: '',
   });
 
-  useEffect(() => {
-    fetchBusinesses();
-  }, [filters]);
+  // Debounce search query
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
 
-  const fetchBusinesses = async () => {
+  useEffect(() => {
+    const handler = setTimeout(() => setDebouncedSearchQuery(searchQuery), 500);
+    return () => clearTimeout(handler);
+  }, [searchQuery]);
+
+  const fetchBusinesses = useCallback(async () => {
     setLoading(true);
     try {
-      // TODO: Replace with actual API call
-      // const response = await api.get('/users/directory', { params: { ...filters, search: searchQuery } });
-      // setBusinesses(response.data.data.users);
-      
-      // Mock data for now
-      setTimeout(() => {
-        setBusinesses([
-          {
-            id: '1',
-            businessName: 'Agro Farms Ltd',
-            sector: 'Agriculture',
-            state: 'Lagos',
-            lga: 'Ikeja',
-            commodities: ['Cocoa', 'Cashew Nuts', 'Palm Oil'],
-            badgeLevel: 2,
-            tier: 'PRO',
-            contactHidden: user?.tier === 'BASIC',
-          },
-          {
-            id: '2',
-            businessName: 'Global Trade Corp',
-            sector: 'Agriculture',
-            state: 'Kano',
-            commodities: ['Sesame Seeds', 'Groundnuts'],
-            badgeLevel: 3,
-            tier: 'ENTERPRISE',
-            contactHidden: user?.tier === 'BASIC',
-          },
-          {
-            id: '3',
-            businessName: 'Green Valley Exports',
-            sector: 'Agriculture',
-            state: 'Ogun',
-            lga: 'Abeokuta',
-            commodities: ['Ginger', 'Hibiscus (Zobo)'],
-            badgeLevel: 1,
-            tier: 'PRO',
-            contactHidden: user?.tier === 'BASIC',
-          },
-        ]);
-        setLoading(false);
-      }, 1000);
+      const response = await api.get('/users/directory', {
+        params: {
+          ...filters,
+          search: debouncedSearchQuery,
+          limit: 30,
+        },
+      });
+      setBusinesses(response.data.data.users || []);
     } catch (error) {
       console.error('Failed to fetch businesses:', error);
+    } finally {
       setLoading(false);
     }
-  };
+  }, [filters, debouncedSearchQuery]);
+
+  useEffect(() => {
+    fetchBusinesses();
+  }, [fetchBusinesses]);
 
   const handleFilterChange = (key: string, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
@@ -89,6 +65,7 @@ export default function MarketplacePage() {
       commodity: '',
       businessType: '',
     });
+    setSearchQuery('');
   };
 
   const handleSearch = () => {
@@ -183,7 +160,15 @@ export default function MarketplacePage() {
                 {businesses.map((business) => (
                   <BusinessCard
                     key={business.id}
-                    {...business}
+                    id={business.id}
+                    businessName={business.businessName || business.email}
+                    sector={business.sector || 'Unknown Sector'}
+                    state={business.state || 'Unknown'}
+                    lga={business.lga}
+                    commodities={business.commodities || []}
+                    badgeLevel={business.badgeLevel}
+                    tier={business.tier}
+                    contactHidden={user?.tier === 'BASIC'}
                     viewerTier={user?.tier || 'BASIC'}
                   />
                 ))}
@@ -200,7 +185,7 @@ export default function MarketplacePage() {
             className="absolute inset-0 bg-black/50"
             onClick={() => setShowMobileFilters(false)}
           />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[80vh] overflow-hidden rounded-t-2xl bg-white">
+          <div className="absolute bottom-0 left-0 right-0 max-h-[80vh] overflow-y-auto rounded-t-2xl bg-white">
             <FilterPanel
               filters={filters}
               onFilterChange={handleFilterChange}

@@ -226,3 +226,58 @@ export interface AdminLoginResponse {
   accessToken: string;
   admin: AdminUser;
 }
+
+// ─── Listings & Inquiries ──────────────────────────────────────────────────────
+
+export type ListingStatus = 'DRAFT' | 'PENDING_REVIEW' | 'LIVE' | 'PAUSED' | 'EXPIRED' | 'REJECTED';
+
+export interface Listing {
+  id: string;
+  sellerId: string;
+  title: string;
+  commodityType: string;
+  category: string;
+  description: string;
+  quantityAvailable: number | string;
+  quantityUnit: string;
+  pricePerUnit?: number | string;
+  currency: string;
+  priceOnRequest: boolean;
+  minimumOrder?: number | string;
+  deliveryTerms: string;
+  qualityGrade?: string;
+  certifications: string[];
+  locationState: string;
+  locationLga?: string;
+  validUntil: string;
+  status: ListingStatus;
+  photoS3Keys: string[];
+  viewCount: number;
+  inquiryCount: number;
+  matchCount: number;
+  createdAt: string;
+  updatedAt: string;
+  seller?: User;
+}
+
+export type InquiryStatus = 'SENT' | 'VIEWED' | 'RESPONDED' | 'DEAL_INITIATED' | 'CLOSED';
+
+export interface Inquiry {
+  id: string;
+  buyerId: string;
+  sellerId: string;
+  listingId?: string;
+  quantityOfInterest?: number | string;
+  quantityUnit?: string;
+  preferredDelivery?: string;
+  messageContent: string;
+  status: InquiryStatus;
+  viewedAt?: string;
+  respondedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+  buyer?: User;
+  seller?: User;
+  listing?: Listing;
+}
+

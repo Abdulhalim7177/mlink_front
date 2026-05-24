@@ -59,7 +59,8 @@ export default function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boo
   ];
 
   const managementLinks = [
-    { name: 'Inquiries', href: '/dashboard/inquiries', icon: MessageSquare, implemented: false },
+    { name: 'My Listings', href: '/dashboard/listings', icon: Briefcase, implemented: true },
+    { name: 'Inquiries', href: '/dashboard/inquiries', icon: MessageSquare, implemented: true },
     { name: 'Deals & Contracts', href: '/dashboard/deals', icon: FileSignature, implemented: false },
   ];
 
