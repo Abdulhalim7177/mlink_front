@@ -49,11 +49,18 @@ export function ConversationList({ conversations, activeId, onSelect, loading, c
             className={`w-full text-left p-4 hover:bg-gray-50 transition-colors ${activeId === conv.id ? 'bg-primary/5 border-l-4 border-primary' : 'border-l-4 border-transparent'}`}
           >
             <div className="flex justify-between items-start mb-1">
-              <span className={`font-semibold truncate ${isUnread ? 'text-gray-900 font-bold' : 'text-gray-700'}`}>
-                {displayName}
-              </span>
+              <div className="flex flex-col">
+                <span className={`font-semibold truncate ${isUnread ? 'text-gray-900 font-bold' : 'text-gray-700'}`}>
+                  {displayName}
+                </span>
+                {conv.inquiry && (
+                  <span className="text-xs text-primary font-medium truncate mt-0.5">
+                    {conv.inquiry.listing ? `Re: ${conv.inquiry.listing.commodityType}` : 'Direct Inquiry'}
+                  </span>
+                )}
+              </div>
               {lastMessage && (
-                <span className="text-xs text-gray-400 whitespace-nowrap ml-2">
+                <span className="text-xs text-gray-400 whitespace-nowrap ml-2 mt-1">
                   {formatDistanceToNow(new Date(lastMessage.createdAt), { addSuffix: true })}
                 </span>
               )}

@@ -139,6 +139,7 @@ export function ChatInterface({ conversation, currentUserId, onMessageSent }: Ch
     try {
       const response = await api.post('/messages', {
         recipientId: otherParticipant.id,
+        conversationId: conversation.id,
         content: inputValue.trim()
       });
       
