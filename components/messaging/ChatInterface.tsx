@@ -29,7 +29,9 @@ export function ChatInterface({ conversation, currentUserId, onMessageSent }: Ch
     markAsRead();
     
     // Connect to WebSocket
-    const socket = io(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000', {
+    const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:9000/api/v1';
+    const socketUrl = apiUrl.replace('/api/v1', '');
+    const socket = io(socketUrl, {
       withCredentials: true,
     });
     
