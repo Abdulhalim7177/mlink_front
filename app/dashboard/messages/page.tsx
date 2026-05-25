@@ -61,7 +61,7 @@ export default function MessagesPage() {
 
       {/* Main Content: Chat Interface */}
       <div className="flex-1 flex flex-col h-full bg-white relative">
-        {activeConversationId ? (
+        {activeConversation ? (
           <ChatInterface 
             conversation={activeConversation}
             currentUserId={user?.id || ''}
@@ -69,7 +69,7 @@ export default function MessagesPage() {
           />
         ) : (
           <div className="flex-1 flex items-center justify-center text-gray-500">
-            {conversations.length === 0 ? 'No conversations yet' : 'Select a conversation to start chatting'}
+            {loading ? 'Loading conversations...' : conversations.length === 0 ? 'No conversations yet' : 'Select a conversation to start chatting'}
           </div>
         )}
       </div>
