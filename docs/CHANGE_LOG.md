@@ -16,3 +16,20 @@
 
 - Inserted reactive `Awaiting Verification` alert banner globally across the persistent Dashboard layout intelligently preventing re-submits until queue processing concludes.
 - Hardened multipart validators requiring exactly 5 blob variables universally. 
+
+
+## [2026-05-25] - v1.0.3
+
+### Added
+
+- Scaffolded the `UnifiedChat` module handling robust real-time text, voice notes, and group calls across Clusters, Projects, and Inquiries.
+- Developed the `CallInterface` for WebRTC voice communication featuring mesh-topology peer connections and isolated Supabase Realtime channels (`call_room:<callId>`).
+- Built an Active Speaker Visualizer using the Web Audio API to display animated frequency waves for speaking participants.
+- Implemented a `GlobalCallManager` integrated into the `DashboardLayout` to intercept incoming call signaling app-wide and present a ringing `CallNotification` component.
+- Implemented rich `CallHistory` views featuring HoverCards displaying complete participant profile details and avatars.
+
+### Updated
+
+- Updated `ChatInterface` and `ConversationList` to parse and beautifully render active `inquiry` listing titles (e.g., "Re: Cashew Nuts").
+- Fixed React dependency arrays in `CallInterface` to isolate peer initialization from call duration timers.
+- Overhauled the `ChatInterface` WebSocket client logic to ensure immediate text rendering without requiring manual page refreshes.

@@ -15,11 +15,11 @@
 | **S4** | 7–8 | May 14 – May 27 | Phase 2 | Admin Verification Queue | ✅ Completed |
 | **S5** | 9–10 | May 28 – Jun 10 | Phase 2 | Admin Dashboard | ✅ Completed |
 | **S6** | 11–12 | Jun 11 – Jun 24 | Phase 3 | Basic Marketplace & Market Pulse | ✅ Completed |
-| **S7** | 13–14 | Jun 25 – Jul 8 | Phase 3 | Knowledge Hub & Dashboard | 🔲 Not Started |
-| **S8** | 15–16 | Jul 9 – Jul 22 | Phase 4 | Listing Forms & Management | 🔲 Not Started |
-| **S9** | 17–18 | Jul 23 – Aug 5 | Phase 4 | Search & Inquiry UI | 🔲 Not Started |
-| **S10** | 19–20 | Aug 6 – Aug 19 | Phase 5 | Core Messaging UI | 🔲 Not Started |
-| **S11** | 21–22 | Aug 20 – Sep 2 | Phase 5 | Messaging Polish | 🔲 Not Started |
+| **S7** | 13–14 | Jun 25 – Jul 8 | Phase 3 | Knowledge Hub & Dashboard | ✅ Completed |
+| **S8** | 15–16 | Jul 9 – Jul 22 | Phase 4 | Listing Forms & Management | ✅ Completed |
+| **S9** | 17–18 | Jul 23 – Aug 5 | Phase 4 | Search & Inquiry UI | ✅ Completed |
+| **S10** | 19–20 | Aug 6 – Aug 19 | Phase 5 | Core Messaging UI | ✅ Completed |
+| **S11** | 21–22 | Aug 20 – Sep 2 | Phase 5 | Messaging Polish | ✅ Completed |
 | **S12** | 23–24 | Sep 3 – Sep 16 | Phase 6 | Service Listings UI | 🔲 Not Started |
 | **S13** | 25–26 | Sep 17 – Sep 30 | Phase 6 | Booking Flow | 🔲 Not Started |
 | **S14** | 27–28 | Oct 1 – Oct 14 | Phase 7 | Subscription & Paystack | 🔲 Not Started |
@@ -28,7 +28,7 @@
 
 ---
 
-## Current Sprint: S1 — Project Setup & Design System
+## Current Sprint: S12 — Service Listings UI
 
 ### Tasks
 
@@ -108,6 +108,38 @@ Project starts → landing page renders with brand styling → shared components
 - [x] FE-6.5 — Build PriceTable component (commodity, state, price, unit, date)
 - [x] FE-6.6 — Build FilterPanel (desktop sidebar, mobile slide-up drawer)
 - [x] FE-6.7 — Build UpgradePrompt component (feature-specific messaging, pricing, CTA)
+
+### S7 — Knowledge Hub & Dashboard
+- [x] FE-7.1 — Trade Knowledge Hub page
+- [x] FE-7.2 — Main app layout (sidebar/bottom nav)
+- [x] FE-7.3 — Role-aware Dashboard page
+- [x] FE-7.4 — Integrate UpgradePrompt globally
+- [x] FE-7.5 — Mobile polish
+
+### S8 — Listing Management UI (Seller Focus)
+- [x] FE-8.1 — Listing Creation Form (multi-step, photo upload)
+- [x] FE-8.2 — "My Listings" Dashboard
+- [x] FE-8.3 — Admin Listing Moderation UI
+- [x] FE-8.4 — Listing Quota UI enforcement
+
+### S9 — Search & Structured Inquiry UI (Buyer Focus)
+- [x] FE-9.1 — Advanced Search Interface
+- [x] FE-9.2 — Structured Inquiry Modal
+- [x] FE-9.3 — Inquiry Quota Display
+- [x] FE-9.4 — "My Inquiries" Tracking Page
+- [x] FE-9.5 — Verified Badge Visibility on listings
+
+### S10 — Core Messaging & Calling UI
+- [x] FE-10.1 — UnifiedChat component & Group Calls
+- [x] FE-10.2 — Contact Warning Banner & PII detection
+- [x] FE-10.3 — Inquiry-Gated Chat initialization
+- [x] FE-10.4 — WebRTC Voice Call logic (CallInterface, mesh topology)
+
+### S11 — Messaging Polish & Live Intelligence
+- [x] FE-11.1 — Active Speaker visualizer & audio frequency analysis
+- [x] FE-11.2 — Global Call Notifications (DashboardLayout)
+- [x] FE-11.3 — Call History HoverCards & detailed participants
+- [x] FE-11.4 — Market Pulse Pro View (Live Price Table)
 
 ---
 
