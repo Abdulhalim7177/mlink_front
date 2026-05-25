@@ -18,14 +18,9 @@ export default function MessagesPage() {
   const [activeConversationId, setActiveConversationId] = useState<string | null>(conversationParam);
   const [loading, setLoading] = useState(true);
 
-  // Check Pro Tier
-  const isPro = user?.tier === 'PRO' || user?.tier === 'ENTERPRISE' || user?.tier === 'ADMIN';
-
   useEffect(() => {
-    if (isPro) {
-      fetchConversations();
-    }
-  }, [isPro]);
+    fetchConversations();
+  }, []);
 
   const fetchConversations = async () => {
     setLoading(true);
@@ -43,30 +38,6 @@ export default function MessagesPage() {
       setLoading(false);
     }
   };
-
-  if (!isPro) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6">
-        <div className="bg-white p-8 rounded-xl shadow-sm text-center max-w-md w-full border border-gray-200">
-          <div className="flex justify-center mb-4">
-            <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center">
-              <ShieldAlert className="h-8 w-8 text-primary" />
-            </div>
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Pro Feature</h2>
-          <p className="text-gray-600 mb-6">
-            Secure Messaging is available exclusively for verified Pro and Enterprise members to ensure quality B2B interactions.
-          </p>
-          <button 
-            onClick={() => router.push('/subscription')}
-            className="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-primary-dark transition-colors"
-          >
-            Upgrade to Pro
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   const activeConversation = conversations.find(c => c.id === activeConversationId);
 
