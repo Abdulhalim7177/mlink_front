@@ -13,7 +13,8 @@ import {
   MessageSquare,
   FileSignature,
   Settings,
-  LogOut
+  LogOut,
+  Package
 } from 'lucide-react';
 import api from '../../lib/api';
 
@@ -54,7 +55,8 @@ export default function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boo
   const platformLinks = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutGrid, implemented: true },
     { name: 'Market Pulse', href: '/dashboard/market-pulse', icon: BarChart2, implemented: true },
-    { name: 'Marketplace', href: '/dashboard/marketplace', icon: Search, implemented: true },
+    { name: 'Business Directory', href: '/dashboard/marketplace', icon: Search, implemented: true },
+    { name: 'Commodity Market', href: '/dashboard/market', icon: Package, implemented: true },
     { name: 'AI Matching', href: '/dashboard/ai-matches', icon: Brain, implemented: false },
   ];
 

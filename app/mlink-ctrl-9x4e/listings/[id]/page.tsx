@@ -107,49 +107,53 @@ export default function AdminListingDetailsPage({ params }: { params: Promise<{ 
   };
 
   return (
-    <div className="p-6">
-      <div className="max-w-5xl mx-auto space-y-6">
-        
-        {/* Header */}
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <button 
-              onClick={() => router.back()}
-              className="p-2 rounded-full hover:bg-gray-200 text-gray-600 transition-colors bg-white shadow-sm border border-gray-200"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </button>
-            <div>
-              <div className="flex items-center gap-3">
-                <h1 className="text-2xl font-bold text-gray-900">{listing.title}</h1>
-                {getStatusBadge(listing.status)}
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      {/* Header */}
+      <div className="border-b border-gray-200 bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={() => router.back()}
+                className="p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-colors bg-gray-50 border border-gray-200"
+              >
+                <ArrowLeft className="w-5 h-5" />
+              </button>
+              <div>
+                <div className="flex items-center gap-3">
+                  <h1 className="text-2xl font-bold text-gray-900">{listing.title}</h1>
+                  {getStatusBadge(listing.status)}
+                </div>
+                <p className="mt-1 text-sm text-gray-500">
+                  Created on {new Date(listing.createdAt).toLocaleDateString()}
+                </p>
               </div>
-              <p className="mt-1 text-sm text-gray-500">
-                Created on {new Date(listing.createdAt).toLocaleDateString()}
-              </p>
             </div>
+            
+            {listing.status === 'PENDING_REVIEW' && (
+              <div className="flex gap-2">
+                <Button 
+                  onClick={handleApprove} 
+                  disabled={actionLoading}
+                  className="bg-green-600 hover:bg-green-700 text-white"
+                >
+                  <Check className="w-4 h-4 mr-2" /> Approve
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={() => setIsRejecting(true)}
+                  disabled={actionLoading}
+                  className="text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300"
+                >
+                  <X className="w-4 h-4 mr-2" /> Reject
+                </Button>
+              </div>
+            )}
           </div>
-          
-          {listing.status === 'PENDING_REVIEW' && (
-            <div className="flex gap-2">
-              <Button 
-                onClick={handleApprove} 
-                disabled={actionLoading}
-                className="bg-green-600 hover:bg-green-700 text-white"
-              >
-                <Check className="w-4 h-4 mr-2" /> Approve
-              </Button>
-              <Button 
-                variant="outline" 
-                onClick={() => setIsRejecting(true)}
-                disabled={actionLoading}
-                className="text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300"
-              >
-                <X className="w-4 h-4 mr-2" /> Reject
-              </Button>
-            </div>
-          )}
         </div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex-1 w-full space-y-6">
 
         {isRejecting && (
           <div className="bg-red-50 border border-red-200 rounded-xl p-4 shadow-sm">

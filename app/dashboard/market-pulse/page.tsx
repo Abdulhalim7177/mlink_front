@@ -40,26 +40,28 @@ export default function MarketPulsePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
-      <div className="border-b border-gray-200 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100">
-              <TrendingUp className="h-6 w-6 text-emerald-600" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Market Pulse</h1>
-              <p className="mt-1 text-sm text-gray-600">
-                Real-time commodity prices across Nigeria
-              </p>
+      <div className="bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100 shrink-0">
+                <TrendingUp className="h-6 w-6 text-emerald-600" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">Market Pulse</h1>
+                <p className="mt-1 text-sm text-gray-600">
+                  Real-time commodity prices across Nigeria
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 flex-1 w-full">
         <div className="space-y-6">
           {/* Data Lag Banner */}
           <DataLagBanner dataLag={dataLag} onUpgrade={handleUpgrade} />

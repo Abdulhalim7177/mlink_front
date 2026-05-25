@@ -73,46 +73,47 @@ export default function MarketplacePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
-      <div className="border-b border-gray-200 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-2xl font-bold text-gray-900">Business Directory</h1>
-          <p className="mt-1 text-sm text-gray-600">
-            Discover verified businesses across Nigeria
-          </p>
-        </div>
-      </div>
-
-      {/* Search Bar */}
-      <div className="border-b border-gray-200 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex gap-3">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
-              <Input
-                type="text"
-                placeholder="Search businesses..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                className="pl-10"
-              />
+      <div className="bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                <Building2 className="w-6 h-6 text-primary" />
+                Business Directory
+              </h1>
+              <p className="mt-1 text-sm text-gray-600">
+                Discover verified businesses across Nigeria
+              </p>
             </div>
-            <Button onClick={handleSearch}>Search</Button>
-            <Button
-              variant="outline"
-              onClick={() => setShowMobileFilters(true)}
-              className="lg:hidden"
-            >
-              <SlidersHorizontal className="h-5 w-5" />
-            </Button>
+            
+            <div className="flex gap-3 flex-1 md:max-w-md">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                <Input
+                  type="text"
+                  placeholder="Search businesses..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                  className="pl-9 bg-gray-50 border-gray-200 focus-visible:ring-primary h-10"
+                />
+              </div>
+              <Button
+                variant="outline"
+                onClick={() => setShowMobileFilters(true)}
+                className="lg:hidden shrink-0"
+              >
+                <SlidersHorizontal className="h-5 w-5" />
+              </Button>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 flex-1 w-full">
         <div className="flex gap-6">
           {/* Desktop Filters */}
           <aside className="hidden w-64 flex-shrink-0 lg:block">
