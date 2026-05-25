@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { TrendingUp } from 'lucide-react';
 import { PriceTable } from '@/components/market-pulse/PriceTable';
 import { DataLagBanner } from '@/components/market-pulse/DataLagBanner';
+import { MarketPulseFilters } from '@/components/market-pulse/MarketPulseFilters';
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner';
 import { useAuthStore } from '@/store/auth.store';
 import { useRouter } from 'next/navigation';
@@ -16,14 +17,22 @@ export default function MarketPulsePage() {
   const [loading, setLoading] = useState(true);
   const [dataLag, setDataLag] = useState('7 days');
 
-  useEffect(() => {
-    fetchPrices();
-  }, []);
+  // Filter state
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [places, setPlaces] = useState<string[]>([]);
+  const [sector, setSector] = useState<string[]>([]);
 
-  const fetchPrices = async () => {
+  const fetchPrices = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await api.get('/market-pulse/prices');
+      const params = new URLSearchParams();
+      if (startDate) params.append('startDate', startDate);
+      if (endDate) params.append('endDate', endDate);
+      if (places.length > 0) params.append('places', places.join(','));
+      if (sector.length > 0) params.append('sector', sector.join(','));
+
+      const response = await api.get(`/market-pulse/prices?${params.toString()}`);
       setPrices(response.data.data.prices || []);
       setDataLag(response.data.data.dataLag || '7 days');
       setLoading(false);
@@ -33,7 +42,11 @@ export default function MarketPulsePage() {
       setDataLag('7 days');
       setLoading(false);
     }
-  };
+  }, [startDate, endDate, places, sector]);
+
+  useEffect(() => {
+    fetchPrices();
+  }, [fetchPrices]);
 
   const handleUpgrade = () => {
     router.push('/subscription');
@@ -65,6 +78,20 @@ export default function MarketPulsePage() {
         <div className="space-y-6">
           {/* Data Lag Banner */}
           <DataLagBanner dataLag={dataLag} onUpgrade={handleUpgrade} />
+
+          {/* Pro Filters */}
+          <MarketPulseFilters 
+            userTier={user?.tier}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            sector={sector}
+            setSector={setSector}
+            places={places}
+            setPlaces={setPlaces}
+            onApplyFilters={fetchPrices}
+          />
 
           {/* Stats Cards */}
           <div className="grid gap-4 sm:grid-cols-3">

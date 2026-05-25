@@ -34,13 +34,16 @@ export default function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boo
     }
   };
 
-  const navUserAbbr = user?.profile?.firstName 
+  const navUserAbbr = user?.profile?.businessName
+    ? user.profile.businessName.charAt(0).toUpperCase()
+    : user?.profile?.firstName 
     ? `${user.profile.firstName.charAt(0)}${user.profile.lastName?.charAt(0) || ''}`
     : user?.email.charAt(0).toUpperCase() || 'U';
 
-  const navUserName = user?.profile?.firstName
-    ? `${user.profile.firstName} ${user.profile.lastName}`
-    : user?.email.split('@')[0];
+  const businessName = user?.profile?.businessName;
+  const fullName = user?.profile?.firstName ? `${user.profile.firstName} ${user.profile.lastName}` : null;
+  const displayMain = businessName || fullName || user?.email?.split('@')[0] || 'User';
+  const displaySub = (businessName && fullName) ? fullName : user?.email;
 
   const tierBadgeColors: Record<string, string> = {
     'BASIC': 'bg-gray-700 text-gray-300 border-gray-600',
@@ -54,10 +57,11 @@ export default function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boo
   // Navigation Links
   const platformLinks = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutGrid, implemented: true },
+    { name: 'Messages', href: '/dashboard/messages', icon: MessageSquare, implemented: true },
     { name: 'Market Pulse', href: '/dashboard/market-pulse', icon: BarChart2, implemented: true },
     { name: 'Business Directory', href: '/dashboard/marketplace', icon: Search, implemented: true },
     { name: 'Commodity Market', href: '/dashboard/market', icon: Package, implemented: true },
-    { name: 'AI Matching', href: '/dashboard/ai-matches', icon: Brain, implemented: false },
+    { name: 'Trade Intelligence', href: '/dashboard/intelligence', icon: Brain, implemented: false },
   ];
 
   const managementLinks = [
@@ -97,13 +101,19 @@ export default function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boo
 
         {/* User Snippet */}
         <div className="p-4 border-b border-gray-800">
-          <div className="flex items-center space-x-3 p-2 rounded-lg bg-gray-800/50">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-primary-light flex items-center justify-center text-white font-bold tracking-widest shrink-0">
-              {navUserAbbr}
+          <div className="flex flex-col space-y-3 p-3 rounded-xl bg-gray-800/40 border border-gray-700/50">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-primary-light flex items-center justify-center text-white font-bold tracking-widest shrink-0 shadow-inner">
+                {navUserAbbr}
+              </div>
+              <div className="overflow-hidden flex-1">
+                <h4 className="text-sm font-bold text-white truncate capitalize" title={displayMain}>{displayMain}</h4>
+                <p className="text-xs text-gray-400 truncate" title={displaySub}>{displaySub}</p>
+              </div>
             </div>
-            <div className="overflow-hidden">
-              <h4 className="text-sm font-semibold text-white truncate capitalize">{navUserName}</h4>
-              <div className={`mt-0.5 inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold border ${tierBadgeColors[currentTierLabel]}`}>
+            <div className="flex items-center justify-between bg-gray-900/50 p-2 rounded-lg">
+              <span className="text-xs text-gray-400 font-medium">Plan</span>
+              <div className={`inline-flex px-2 py-0.5 rounded text-[10px] font-bold border ${tierBadgeColors[currentTierLabel]}`}>
                 {currentTierLabel}
               </div>
             </div>
