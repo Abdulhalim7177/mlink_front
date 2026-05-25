@@ -146,7 +146,10 @@ export function ChatInterface({ conversation, currentUserId, onMessageSent }: Ch
       setInputValue('');
       onMessageSent(); // Update conversation list
       
-      setMessages(prev => [...prev, response.data.data.message]);
+      setMessages(prev => {
+        if (prev.find(m => m.id === response.data.data.message.id)) return prev;
+        return [...prev, response.data.data.message];
+      });
 
     } catch (error) {
       console.error('Failed to send message:', error);
