@@ -18,7 +18,8 @@ export type VerificationStatus =
 export type UserTier =
   | 'BASIC'
   | 'PRO'
-  | 'ENTERPRISE';
+  | 'ENTERPRISE'
+  | 'ADMIN';
 
 export type UserRole = 'USER' | 'ADMIN';
 

@@ -55,7 +55,15 @@ export default function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boo
   const currentTierLabel = user?.tier || 'BASIC';
 
   // Navigation Links
-  const platformLinks = [
+  interface NavLink {
+    name: string;
+    href: string;
+    icon: React.ElementType;
+    implemented: boolean;
+    badge?: string;
+  }
+
+  const platformLinks: NavLink[] = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutGrid, implemented: true },
     { name: 'Messages', href: '/dashboard/messages', icon: MessageSquare, implemented: true },
     { name: 'Market Pulse', href: '/dashboard/market-pulse', icon: BarChart2, implemented: true },
@@ -64,7 +72,7 @@ export default function Sidebar({ mobileOpen, setMobileOpen }: { mobileOpen: boo
     { name: 'Trade Intelligence', href: '/dashboard/intelligence', icon: Brain, implemented: false },
   ];
 
-  const managementLinks = [
+  const managementLinks: NavLink[] = [
     { name: 'My Listings', href: '/dashboard/listings', icon: Briefcase, implemented: true },
     { name: 'Inquiries', href: '/dashboard/inquiries', icon: MessageSquare, implemented: true },
     { name: 'Deals & Contracts', href: '/dashboard/deals', icon: FileSignature, implemented: false },

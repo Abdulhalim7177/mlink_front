@@ -7,11 +7,24 @@ import { Inquiry } from '@/lib/types';
 import { MessageSquare, Inbox, Send, Eye, CheckCircle, XCircle } from 'lucide-react';
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner';
 
+import { useRouter } from 'next/navigation';
+
 export default function InquiriesPage() {
   const { user } = useAuthStore();
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<'received' | 'sent'>('received');
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const initiateMessage = async (inquiryId: string) => {
+    try {
+      const response = await api.post('/messages/conversations/initiate', { inquiryId });
+      const conversationId = response.data.data.id;
+      router.push(`/dashboard/messages?conversation=${conversationId}`);
+    } catch (error) {
+      console.error('Failed to initiate conversation:', error);
+    }
+  };
 
   useEffect(() => {
     fetchInquiries(activeTab);
@@ -161,6 +174,13 @@ export default function InquiriesPage() {
                 </div>
 
                 <div className="flex flex-row md:flex-col justify-end gap-2 border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 md:pl-6 min-w-[140px]">
+                  <button 
+                    onClick={() => initiateMessage(inquiry.id)}
+                    className="flex items-center justify-center w-full px-3 py-2 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-md text-sm font-medium transition-colors mb-2 md:mb-0"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Message
+                  </button>
                   {activeTab === 'received' && inquiry.status === 'SENT' && (
                     <button 
                       onClick={() => updateStatus(inquiry.id, 'VIEWED')}

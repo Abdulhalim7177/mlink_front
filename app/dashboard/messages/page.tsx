@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '@/store/auth.store';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ConversationList } from '@/components/messaging/ConversationList';
 import { ChatInterface } from '@/components/messaging/ChatInterface';
 import { ShieldAlert } from 'lucide-react';
@@ -11,8 +11,11 @@ import api from '@/lib/api';
 export default function MessagesPage() {
   const { user } = useAuthStore();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const conversationParam = searchParams.get('conversation');
+
   const [conversations, setConversations] = useState<any[]>([]);
-  const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
+  const [activeConversationId, setActiveConversationId] = useState<string | null>(conversationParam);
   const [loading, setLoading] = useState(true);
 
   // Check Pro Tier
@@ -31,7 +34,7 @@ export default function MessagesPage() {
       setConversations(response.data.data || []);
       
       // Auto-select first conversation if exists and none selected
-      if (!activeConversationId && response.data.data?.length > 0) {
+      if (!activeConversationId && !conversationParam && response.data.data?.length > 0) {
         setActiveConversationId(response.data.data[0].id);
       }
     } catch (error) {
