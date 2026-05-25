@@ -24,6 +24,10 @@ export function ChatInterface({ conversation, currentUserId, onMessageSent }: Ch
   const profile = otherParticipant?.profile;
   const displayName = profile?.businessName || (profile?.firstName ? `${profile.firstName} ${profile.lastName}` : 'Unknown User');
 
+  const [isTyping, setIsTyping] = useState(false);
+  const [otherUserTyping, setOtherUserTyping] = useState(false);
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     fetchMessages();
     markAsRead();
@@ -37,24 +41,38 @@ export function ChatInterface({ conversation, currentUserId, onMessageSent }: Ch
     
     socketRef.current = socket;
 
-    socket.emit('join_conversation', conversation.id);
+    socket.on('connect', () => {
+      socket.emit('join_conversation', conversation.id);
+    });
 
     socket.on('new_message', (message: any) => {
       if (message.conversationId === conversation.id) {
         setMessages(prev => {
-          // Avoid duplicates
           if (prev.find(m => m.id === message.id)) return prev;
           return [...prev, message];
         });
         
-        // If message is from other user, mark as read
         if (message.senderId !== currentUserId) {
           markAsRead();
+          setOtherUserTyping(false); // Clear typing indicator on new message
         }
       }
     });
 
+    socket.on('user_typing', ({ userId }) => {
+      if (userId !== currentUserId) {
+        setOtherUserTyping(true);
+      }
+    });
+
+    socket.on('user_stop_typing', ({ userId }) => {
+      if (userId !== currentUserId) {
+        setOtherUserTyping(false);
+      }
+    });
+
     return () => {
+      if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
       socket.emit('leave_conversation', conversation.id);
       socket.disconnect();
     };
@@ -89,11 +107,35 @@ export function ChatInterface({ conversation, currentUserId, onMessageSent }: Ch
     }
   };
 
+  const handleTyping = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    
+    if (!isTyping) {
+      setIsTyping(true);
+      socketRef.current?.emit('typing', { conversationId: conversation.id, userId: currentUserId });
+    }
+
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+
+    typingTimeoutRef.current = setTimeout(() => {
+      setIsTyping(false);
+      socketRef.current?.emit('stop_typing', { conversationId: conversation.id, userId: currentUserId });
+    }, 2000);
+  };
+
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
 
     setIsSending(true);
+    
+    // Stop typing immediately when sending
+    setIsTyping(false);
+    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+    socketRef.current?.emit('stop_typing', { conversationId: conversation.id, userId: currentUserId });
+
     try {
       const response = await api.post('/messages', {
         recipientId: otherParticipant.id,
@@ -104,10 +146,6 @@ export function ChatInterface({ conversation, currentUserId, onMessageSent }: Ch
       setInputValue('');
       onMessageSent(); // Update conversation list
       
-      // Socket will broadcast the new message, so we don't manually append it here to avoid duplicates
-      // Wait, let's append optimistically or just wait for socket event
-      // If we don't append it might feel slightly lagged. Let's append if socket fails, or rely on socket.
-      // Actually, relying on socket ensures consistency. Let's append optimistically for better UX:
       setMessages(prev => [...prev, response.data.data.message]);
 
     } catch (error) {
@@ -161,6 +199,15 @@ export function ChatInterface({ conversation, currentUserId, onMessageSent }: Ch
             </div>
           );
         })}
+        {otherUserTyping && (
+          <div className="flex flex-col items-start">
+            <div className="bg-white text-gray-800 border border-gray-100 rounded-2xl rounded-bl-none px-4 py-3 shadow-sm flex gap-1 items-center">
+              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+            </div>
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
 
@@ -170,7 +217,7 @@ export function ChatInterface({ conversation, currentUserId, onMessageSent }: Ch
           <input
             type="text"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={handleTyping}
             placeholder="Type a message..."
             className="flex-1 px-4 py-2.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
           />
